@@ -493,12 +493,13 @@
 
 ### india-supply-chain-watch-2po3
 
-- **定位：** 印度产业政策、PCB 与跨境投资资料浏览站；README 列出 Next.js、Prisma 与受控投稿能力。
+- **定位：** 印度产业政策、PCB、半导体和跨境投资研究平台；已完成生产部署加固、来源新鲜度提示和公开数据隐私治理。
 - **GitHub：** [1998x-stack/india-supply-chain-watch](https://github.com/1998x-stack/india-supply-chain-watch)（public）；[Vercel 控制台](https://vercel.com/xiemings-projects/india-supply-chain-watch-2po3)。
-- **技术证据：** Next.js 15 / Prisma / PostgreSQL（可选）；依据级别：`readme`。
-- **最近部署：** `READY`；目标：`production`；时间：2026-11-19T03:23:03.208Z。
-- **风险：** 此前无部署历史，已触发首次构建；公开资料功能与数据库投稿必须分别验收。
-- **建议：** 检查首次构建、静态资讯页面，再评估是否开放有审核机制的投稿。
+- **技术证据：** Next.js 15.5、React 19、Prisma 6；GitHub CI 已运行生产构建与 12 条只读 HTTP 冒烟，来源 README/实际构建日志。
+- **最近部署：** `READY`；目标：`production`；提交 `a57a3f5`；部署 `dpl_CSRTrMDTpsqZrAbpF9WjbUVmQgcf`；时间：2026-11-19T04:01:29.656Z。
+- **本轮修复：** 新增公开健康接口、CI HTTP 冒烟、30 天资料过期提示、sitemap 来源核验日期修正，防止公开页面泄露内部 `editorNote`。
+- **风险：** 研究资料上次核验为 2026-09-24；外部公网 HTTP、生产数据库、验证码和审核工作流仍未验收。生产 READY 不意味着可公开访问。
+- **建议：** 按 [专项迭代报告](iterations/india-supply-chain-watch-2026-11-19.md) 进行公开域名/业务健康验证及研究资料更新，安全门禁完成之前保持投稿功能关闭。
 
 ### shanghai-map
 
