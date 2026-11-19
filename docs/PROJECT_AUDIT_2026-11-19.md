@@ -19,8 +19,8 @@
 | 金融与政策计算 | 5 | 投资资料、退休政策、个人理财与财务工具 |
 | 社会、法律与传播 | 6 | 法律、政策、传播与情感知识 |
 | 历史与文化 | 8 | 世界史、区域史、史料与文化专题 |
-| 媒体与知识资源 | 8 | 书籍音频、演讲、期刊、知识归档 |
-| 研究情报与地图 | 3 | 跨境产业研究、能源报告与地理浏览 |
+| 媒体与知识资源 | 9 | 书籍音频、演讲、期刊、知识归档 |
+| 研究情报与地图 | 2 | 跨境产业研究、能源报告与地理浏览 |
 
 ## 优先处理的发现
 
@@ -406,7 +406,18 @@
 - **风险：** 此前生产部署 BLOCKED；当前缺乏可构建的真实网站内容。
 - **建议：** 先补充最小可用知识站及资料来源，再审查首次发布。
 
-## 📚 媒体与知识资源（8）
+## 📚 媒体与知识资源（9）
+
+### energy-frontiers-report
+
+- **定位：** 六个系列、28 个 HTML 课件与 22 个 MP3 的历史能源课程档案，实际并非实时能源产业研究报告。
+- **GitHub：** [1998x-stack/energyFrontiersReport](https://github.com/1998x-stack/energyFrontiersReport)（private）；[Vercel 控制台](https://vercel.com/xiemings-projects/energy-frontiers-report)。
+- **技术证据：** 直接核对了 `index.html`、`scripts.js`、`data.js`、`convert.py` 和 Git Tree；音频与 HTML 资产总计约 472 MiB。依据级别 `source-inspection`，不表示已核验课程原文版权。
+- **最近生产部署：** `READY`；目标 `production`；时间 2025-06-12T03:21:49.176Z；尚未更新至最新 PR。
+- **代码优化进度：** [源仓 PR #1](https://github.com/1998x-stack/energyFrontiersReport/pull/1) 已实现课程实际统计、全文标题检索、上一节/下一节、错误状态、移动端和无障碍及 CI，但当前**未合并**。该最终提交 Vercel Preview `READY`，GitHub Actions 在私有仓库启动前连续失败，未分配 runner，无实际测试执行。
+- **P0 风险：** 私有仓库不代表生产域名私有；课程复制与音频网上传播授权未验证。Vercel 原 SSO 主要覆盖 Preview/生成部署 URL，生产主域名公开性尚未独立检查。
+- **下一步：** 确认课程内容授权/私有访问策略，排查 GitHub Actions 账户/计费/runner 状态，完成真实音频与手机 E2E；在通过质量门禁前不要声称代码已发布。
+- **专项审计：** [历史课程平台与部署风险](iterations/energy-frontiers-archive-2026-11-19.md)。
 
 ### caixin-weekly
 
@@ -480,16 +491,7 @@
 - **风险：** 演讲文稿/资料再分发的版权与许可需核验。
 - **建议：** 明确站点公开展示内容及 PDF 授权，建立检索元数据。
 
-## 🌏 研究情报与地图（3）
-
-### energy-frontiers-report
-
-- **定位：** 根据项目名推测为能源前沿研究或报告目录，内容与技术栈尚未核验。
-- **GitHub：** [1998x-stack/energyFrontiersReport](https://github.com/1998x-stack/energyFrontiersReport)（private）；[Vercel 控制台](https://vercel.com/xiemings-projects/energy-frontiers-report)。
-- **技术证据：** 未核验；依据级别：`name-only`。
-- **最近部署：** `READY`；目标：`production`；时间：2025-06-12T03:21:49.176Z。
-- **风险：** 研究结论、图表数据与引用可靠性待核查。
-- **建议：** 核查报告原文、指标年份、图表来源与维护节奏。
+## 🌏 研究情报与地图（2）
 
 ### india-supply-chain-watch-2po3
 
