@@ -53,9 +53,9 @@
 
 ## GitHub Pages
 
-该项目提供可搜索、按分类/状态/可见性筛选的响应式管理界面；点击任意项目可展开“证据、风险、建议、GitHub 和 Vercel 链接”，还支持 CSV 下载。
+该项目提供一个**资产审计控制台**（不是营销页面）：左侧导航 + 六个区块——资产概览 KPI、分类与证据分布、部署新鲜度、待办队列、可排序项目网格、方法与边界；表格行可打开审计抽屉，支持 CSV 导出、深链（`#projects`、`?project=<name>`）与明/暗主题。设计规范见 [docs/DESIGN_DASHBOARD_2026-11-19.md](docs/DESIGN_DASHBOARD_2026-11-19.md)。
 
-网站由 `site/`、`data/` 构建，不包含服务器端功能或第三方依赖。合并到 `main` 且 GitHub Pages 配置成功后，**预期地址**为：
+界面由 `site/`、`data/` 构建，零框架、零第三方依赖（无外部字体/CDN/图表库），所有数字均由 `data/` 现场推导，因此不会与快照脱节。合并到 `main` 且 GitHub Pages 配置成功后，**预期地址**为：
 
 **https://1998x-stack.github.io/vercel-projects/**
 
@@ -66,15 +66,26 @@
 需要 Node.js 20+：
 
 ```bash
-git clone https://github.com/1998x-stack/vercel-projects.git
-cd vercel-projects
-npm run check
-npm test
-npm run build
+# 质量门禁：目录/隐私边界校验 + 对比度断言 + 单测 + Pages 产物
+npm run check && npm test && npm run build
 python3 -m http.server 8000 --directory dist
+
+# 渲染后可访问性/交互验证（需要本机 Chrome，会启动临时静态服务）
+npm run ui:check                       # 默认 1440px、明暗两套主题
+npm run ui:check -- --width 500 --height 844 --theme dark
+
+# 把数据快照引用的 GitHub 仓库镜像到本地 repos/（该目录已被 .gitignore 忽略）
+npm run clone:repos:bg                # nohup 后台运行，日志写入 logs/
+npm run clone:repos -- --dry-run      # 只打印计划
 ```
 
-然后打开 http://localhost:8000/ ，浏览完整站点。无需 npm install；没有运行时第三方依赖。
+然后打开 http://localhost:8000/ ，浏览完整控制台。无需 npm install；没有运行时第三方依赖。
+
+## 本地仓库镜像（repos/）
+
+`npm run clone:repos` 会按 `data/manifest.json` 的分类顺序，把 48 个被引用的 GitHub 仓库克隆到 `repos/<repo>`，并按仓库（而非按项目）去重——`historicalRecords` 同时服务两个 Vercel 项目，只应克隆一次。默认跳过 `GuHengSpeaksofGoodBooks`（约 3.5 GiB 私有课程档案，须另行授权与确认）。
+
+**`repos/` 与 `logs/` 只存在于本地，绝不提交**（见 `.gitignore`）：私有源码与媒体素材不得进入 Public 仓库。运行结束后会写出 `repos/clone-report.json`，记录每个仓库的状态、HEAD、体积与失败原因。
 
 ## 目录结构
 
@@ -88,14 +99,21 @@ vercel-projects/
 ├── site/
 │   ├── index.html
 │   └── assets/
-│       ├── app.js            # 搜索、筛选、详情、CSV
-│       └── styles.css        # 响应式 UI
+│       ├── app.js            # 控制台渲染：KPI、图表、待办队列、数据网格、抽屉
+│       └── styles.css        # 三层 token（原生值/语义/组件）+ 明暗主题
 ├── scripts/
 │   ├── validate.mjs          # 数据与安全门禁
-│   └── build.mjs             # dist 静态构建
-├── tests/catalog.test.mjs
+│   ├── check-contrast.mjs    # WCAG 对比度断言（明暗两套）
+│   ├── build.mjs             # dist 静态构建
+│   ├── clone-repos.mjs/.sh   # 本地仓库镜像（含 nohup 启动器）
+│   └── ui-check.mjs          # 渲染后界面验证（无头 Chrome + 页内探针）
+├── tests/
+│   ├── catalog.test.mjs
+│   ├── contrast.test.mjs
+│   └── dashboard-ui.test.mjs
 ├── docs/
 │   ├── PROJECT_AUDIT_2026-11-19.md
+│   ├── DESIGN_DASHBOARD_2026-11-19.md
 │   ├── METHODOLOGY.md
 │   └── PAGES.md
 └── .github/workflows/pages.yml

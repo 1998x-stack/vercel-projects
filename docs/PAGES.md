@@ -32,11 +32,22 @@ data/manifest.json + data/groups/*.json + site/
 需要 Node.js 20+，无第三方依赖：
 
 ```bash
-npm run check
-npm test
-npm run build
+npm run check        # 数据/隐私边界 + WCAG 对比度断言
+npm test             # 数据契约 + 对比度 + Dashboard UI 契约
+npm run build        # 生成 dist/
 python3 -m http.server 8000 --directory dist
 ```
+
+渲染后的界面验证（需要本机 Chrome/Chromium，脚本会自己启动临时静态服务并清理临时页面）：
+
+```bash
+npm run ui:check                                        # 1440px，明暗两套主题
+npm run ui:check -- --width 1024 --height 1100 --theme dark
+```
+
+探针会独立重算期望值（直接读 `data/`），然后在真实渲染的 DOM 上校验：KPI/表格/队列计数、图表几何、页面无横向溢出、**聚焦后不被粘性栏遮挡**、**实测计算样式对比度**、排序/筛选/搜索/抽屉交互、主题 token 取值。
+
+> 限制：macOS 上 Chrome 最小窗口宽度为 500px，因此窄屏验证最低为 500px；375–500px 区间由 CSS 断点规则与 `tests/dashboard-ui.test.mjs` 的静态契约测试覆盖，未做像素级渲染验证。
 
 在 `http://localhost:8000/` 打开，检查分类搜索、详情面板、状态筛选、CSV 导出和移动布局。不要仅打开 `site/index.html`，因为发布依赖在构建期将根目录 `data/` 复制进 `dist/data/`。
 
