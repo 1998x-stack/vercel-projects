@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "category": "research-geo",
+  "projects": [
+    {
+      "name": "india-supply-chain-watch-2po3",
+      "github": {
+        "full_name": "1998x-stack/india-supply-chain-watch",
+        "visibility": "public"
+      },
+      "category": "research-geo",
+      "summary": "印度产业政策、PCB 与跨境投资资料浏览站；README 列出 Next.js、Prisma 与受控投稿能力。",
+      "stack": "Next.js 15 / Prisma / PostgreSQL（可选）",
+      "risk": "此前无部署历史，已触发首次构建；公开资料功能与数据库投稿必须分别验收。",
+      "next": "检查首次构建、静态资讯页面，再评估是否开放有审核机制的投稿。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2026-11-19T03:23:03.208Z",
+        "deployment_id": "dpl_5StWstaudfvpp92WFqiJBM9GdcZR"
+      },
+      "site_url": "https://india-supply-chain-watch-2po3.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "shanghai-map",
+      "github": {
+        "full_name": "1998x-stack/shanghai_map",
+        "visibility": "public"
+      },
+      "category": "research-geo",
+      "summary": "纯前端上海地图网页，提供基础地图展示与浏览器交互。",
+      "stack": "HTML/CSS/JS",
+      "risk": "地图数据、版权署名及地理信息更新时间需确认。",
+      "next": "检测底图来源与脚本加载、移动端交互。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2026-08-18T09:10:35.966Z",
+        "deployment_id": "dpl_8zLePMNwDn6TMVXEBSTdCJqt2jAc"
+      },
+      "site_url": "https://shanghai-map.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "energy-frontiers-report",
+      "github": {
+        "full_name": "1998x-stack/energyFrontiersReport",
+        "visibility": "private"
+      },
+      "category": "research-geo",
+      "summary": "根据项目名推测为能源前沿研究或报告目录，内容与技术栈尚未核验。",
+      "stack": "未核验",
+      "risk": "研究结论、图表数据与引用可靠性待核查。",
+      "next": "核查报告原文、指标年份、图表来源与维护节奏。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:21:49.176Z",
+        "deployment_id": "dpl_GDdab4V3ZmLgTD9AScvuWgfktevK"
+      },
+      "site_url": "https://energy-frontiers-report.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}
