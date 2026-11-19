@@ -5,7 +5,7 @@
 ## 审计范围与证据
 
 - **Vercel 项目：** 51 个；**关联 GitHub：** 49 条；**不同 GitHub 仓库：** 48 个。
-- **GitHub 仓库可见性：** Public 7 个；Private 41 个。
+- **GitHub 仓库可见性：** Public 8 个；Private 40 个。
 - **最新一次部署记录分布：** READY 48、NONE 2、BLOCKED 1。状态可能属于 Preview，不应当作全部生产部署状态。
 - **判断限制：** READY 并非 HTTP 可达、域名有效或业务正常的证明；仓库无 README 时，仅进行标有“待核验”的名称级推断。Private 仓库的真实内容与代码**未**在此报告复制。
 
@@ -48,7 +48,7 @@
 ### ceqt-simple
 
 - **定位：** 四象限任务管理的轻量版，前端可离线运行，提供可选 Python 后端及 LLM 增强。
-- **GitHub：** [1998x-stack/CEQTSimple](https://github.com/1998x-stack/CEQTSimple)（private）；[Vercel 控制台](https://vercel.com/xiemings-projects/ceqt-simple)。
+- **GitHub：** [1998x-stack/CEQTSimple](https://github.com/1998x-stack/CEQTSimple)（public）；[Vercel 控制台](https://vercel.com/xiemings-projects/ceqt-simple)。
 - **技术证据：** HTML/JS + 可选 Python API；依据级别：`readme`。
 - **最近部署：** `READY`；目标：`production`；时间：2026-10-01T07:42:36.141Z。
 - **风险：** 与 CEQT 项目目标重叠；需要识别版本定位及域名归属。
