@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "category": "tools-productivity",
+  "projects": [
+    {
+      "name": "ceqt",
+      "github": {
+        "full_name": "1998x-stack/CEQT",
+        "visibility": "public"
+      },
+      "category": "tools-productivity",
+      "summary": "四象限任务管理的复杂版本，仓库 README 描述 FastAPI、Next.js、PostgreSQL/Redis 组件。",
+      "stack": "FastAPI / Next.js（仓库描述）",
+      "risk": "需核对 Vercel 上实际运行的前后端模块，不以 README 架构宣称等于已部署。",
+      "next": "核验 API 路由、环境依赖与生产页面。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2026-03-30T12:16:36.570Z",
+        "deployment_id": "dpl_HKDykYXqaLYVGhk9Z5RvTAR6Emf3"
+      },
+      "site_url": "https://ceqt.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "ceqt-simple",
+      "github": {
+        "full_name": "1998x-stack/CEQTSimple",
+        "visibility": "private"
+      },
+      "category": "tools-productivity",
+      "summary": "四象限任务管理的轻量版，前端可离线运行，提供可选 Python 后端及 LLM 增强。",
+      "stack": "HTML/JS + 可选 Python API",
+      "risk": "与 CEQT 项目目标重叠；需要识别版本定位及域名归属。",
+      "next": "核验静态模式、API 模式及与 CEQT 的关系。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2026-10-01T07:42:36.141Z",
+        "deployment_id": "dpl_4cFRgaFWPNkMtpdJyR5d1HRmTazL"
+      },
+      "site_url": "https://ceqt-simple.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "simple-task-flow",
+      "github": {
+        "full_name": "1998x-stack/SimpleTaskFlow",
+        "visibility": "private"
+      },
+      "category": "tools-productivity",
+      "summary": "根据仓库名推测为轻量任务流程应用；具体功能尚缺可核验说明。",
+      "stack": "未核验",
+      "risk": "用途及维护状态尚不明确。",
+      "next": "检查入口文件、依赖、是否仍有使用价值。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-06T15:13:48.487Z",
+        "deployment_id": "dpl_CbSaUTjg7gALcMv3p7LVCKfrFBDq"
+      },
+      "site_url": "https://simple-task-flow.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "text-compare",
+      "github": {
+        "full_name": "1998x-stack/TextCompare",
+        "visibility": "private"
+      },
+      "category": "tools-productivity",
+      "summary": "本地优先的文本比较工具，使用 Myers 差异对齐、Web Worker 与虚拟化列表处理长文本。",
+      "stack": "Next.js（子目录 text-compare-tool/）",
+      "risk": "需确认 Vercel Root Directory 是否指向实际应用目录。",
+      "next": "核验大文本性能、预览与生产的子目录构建。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "preview/unspecified",
+        "created_at": "2026-11-03T06:30:21.217Z",
+        "deployment_id": "dpl_CBTx9WFgpVAWAZx44UQr4fcKsjXw"
+      },
+      "site_url": "https://text-compare-seven.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "web-guide",
+      "github": {
+        "full_name": "1998x-stack/webGuide",
+        "visibility": "private"
+      },
+      "category": "tools-productivity",
+      "summary": "卡片式项目导航站，支持搜索、明暗主题及响应式布局。",
+      "stack": "原生 HTML/CSS/JS",
+      "risk": "与本资产库可能存在功能重叠；需明确两个项目各自职责。",
+      "next": "确认是否合并项目导航数据，避免重复维护。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:13:02.972Z",
+        "deployment_id": "dpl_D5xEDfcZdapDqSYT21nPftGNEdFs"
+      },
+      "site_url": "https://web-guide-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "v0-ai-chat-interface",
+      "github": null,
+      "category": "tools-productivity",
+      "summary": "Vercel 上存在 AI 聊天界面项目，但没有绑定 GitHub 仓库，也没有部署记录。",
+      "stack": "未核验",
+      "risk": "无源码关联、无可审计构建。",
+      "next": "检查 v0 来源，决定归档或接入受控代码仓库。",
+      "evidence": "vercel-only",
+      "last_deployment": null,
+      "site_url": null,
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "v0-analytics-dashboard",
+      "github": null,
+      "category": "tools-productivity",
+      "summary": "Vercel 上存在分析看板项目，但没有绑定 GitHub 仓库，也没有部署记录。",
+      "stack": "未核验",
+      "risk": "无源码关联、无可审计构建。",
+      "next": "核实是否只是草稿项目，必要时迁移到版本控制。",
+      "evidence": "vercel-only",
+      "last_deployment": null,
+      "site_url": null,
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "portfolio",
+      "github": {
+        "full_name": "1998x-stack/portfolio",
+        "visibility": "private"
+      },
+      "category": "tools-productivity",
+      "summary": "根据项目名推测为作品集或项目展示；仓库 README 未核验到可用说明。",
+      "stack": "未核验",
+      "risk": "站点内容、框架、维护人和权限边界待核查。",
+      "next": "清点页面内容、外部资源及生产访问测试。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-04T16:08:36.944Z",
+        "deployment_id": "dpl_3LFwnawrzHxsP95CZyToKjt8HQBL"
+      },
+      "site_url": "https://portfolio-git-main-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}
