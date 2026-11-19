@@ -13,9 +13,9 @@
 | Vercel 项目 | `xiemings-projects/energy-frontiers-report` |
 | 旧 Production | `dpl_GDdab4V3ZmLgTD9AScvuWgfktevK`，`READY`，2025-06-12 |
 | 源仓优化 PR | https://github.com/1998x-stack/energyFrontiersReport/pull/1 （**OPEN / NOT MERGED**） |
-| 最终 PR SHA | `f4324f66feea74037d4f3d7c9adc9d9d6cb59c3a` |
-| Vercel Preview | `dpl_8fpacUJ8Jqrgi4pd3ENSTBbZDash`，`READY`，属于 PR 分支 |
-| Actions | https://github.com/1998x-stack/energyFrontiersReport/actions/runs/44467340125 （两次尝试均在 runner 分配前失败） |
+| 最终 PR SHA | `1e38c3cd6794fc1fc8f1e1dc699cc0b661526d52` |
+| Vercel Preview | `dpl_2rDJ4YYSasGzKg3kBxc8dYhxfSS8`，`READY`，属于 PR 分支 |
+| Actions | https://github.com/1998x-stack/energyFrontiersReport/actions/runs/44468025492 （两次尝试均在 runner 分配前失败） |
 | 生产内容公网/音频 | **NOT VERIFIED** |
 | 课件复制与网络传播授权 | **NOT VERIFIED** |
 
@@ -36,7 +36,7 @@
 
 ## 3. 当前阻断：GitHub Actions
 
-GitHub Actions Run `44467340125` 首轮失败后已重试一次。两个 Job 都没有分配 runner（`runner_id=0`、空 `runner_name`、`steps=[]`），运行约 2 秒即失败。日志下载返回 GitHub/Azure 的 BlobNotFound，**没有代码层面的失败堆栈可供分析**。
+GitHub Actions 的第一轮 Run `44467340125` 重试失败；进一步修正移动端布局和 Git 中文路径转义后，最新 Run `44468025492` 也在任务运行前失败。相关 Job 都没有分配 runner（`runner_id=0`、空 `runner_name`、`steps=[]`），运行约 2 秒即失败。日志下载返回 GitHub/Azure 的 BlobNotFound，**没有代码层面的失败堆栈可供分析**。
 
 这一现象可能由 GitHub 账户 Actions 配额/账单、私有仓库权限、Runner 分配或平台问题引起，**尚未取得 GitHub annotation 的明确原因**，不应确定地归咎于账单或 YAML。按 [GitHub 官方工作流排障文档](https://docs.github.com/en/actions/how-tos/troubleshoot-workflows)，应在仓库 Actions 与账号计费/额度中查看错误提示；必要时联系 GitHub 支持。因为 CI 未执行，本轮**不自动合并源仓 PR**，不把 Preview READY 当成生产部署验收。
 
