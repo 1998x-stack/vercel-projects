@@ -21,7 +21,7 @@
 | 不据名称编造功能 | `AGENTS.md` 规则 4 | 仪表全部来自真实字段；`name-only` 项目以"待核验"呈现，不得被算作已知信息 |
 | 不把私有信息带进 Public | `AGENTS.md` 规则 3 | 页面只呈现已授权公开的项目名/仓库名/分类；无源码、无密钥、无日志 |
 
-**数据事实（用于校准仪表，已由数据快照核对）**：51 个项目 / 49 条 GitHub 关联 / 48 个唯一仓库；部署状态 READY 48、BLOCKED 1、无部署 2；部署目标 production 45、preview/unspecified 4；仓库 private 41、public 8、未关联 2；证据级别 name-only 31、readme 15、source-inspection 3、vercel-only 2；全部项目 `checked_at` = 2026-11-19；最近一次部署年份 2025 年 35 个、2026 年 14 个。
+**数据事实（用于校准仪表，已由数据快照核对）**：51 个项目 / 49 条 GitHub 关联 / 48 个唯一仓库；部署状态 READY 48、BLOCKED 1、无部署 2；部署目标 production 45、preview/unspecified 4；GitHub 关联**引用** private 41 / public 8（合计 49 条），**唯一**仓库 private 40 / public 8（合计 48 个，`historicalRecords` 属 private 且被 2 个 Vercel 项目共用）；未关联 GitHub 的**项目** 2 个。证据级别 name-only 31、readme 15、source-inspection 3、vercel-only 2；全部项目 `checked_at` = 2026-11-19；最近一次部署年份 2025 年 35 个、2026 年 14 个。
 
 ---
 
@@ -211,8 +211,38 @@ npm run ui:check ...    # 无头 Chrome 渲染后验证（探针独立重算期�
 7. **文案不脱节**：面板脚注中的数量与日期不再硬编码，均由快照现场生成（探针会断言其与 `data/` 一致）。
 6. **提示**：验证过程发现并修复了两个真实缺陷——注入探针时 `String.replace` 会把 `$$` 当作特殊替换模式（改用函数式 replacer，见 `scripts/ui-check.mjs` 注释）；窄屏下命令栏 sticky 位置需按 rail 横条高度补偿。
 
+### 10.1 复验与修正（同快照 2026-11-19，追加记录）
+
+对同一份数据快照重跑全部验证，并修正了两项真实缺陷（只改文档与一条 CSS 声明，不动数据）：
+
+| 缺陷 | 性质 | 证据 | 处理 |
+| --- | --- | --- | --- |
+| 本文 §1 写“仓库 private 41、public 8”，与同句“48 个唯一仓库”矛盾（41+8=49） | P0 数据准确性：把**关联引用数**当成了**唯一仓库数** | 49 条引用中 private 41 / public 8；48 个唯一仓库中 private 40 / public 8。差额来自 private 的 `historicalRecords` 被 2 个 Vercel 项目共用（正是 `AGENTS.md` 规则 5 的情形） | 改写为“关联引用 private 41 / public 8（49 条）；唯一仓库 private 40 / public 8（48 个）” |
+| `.commandbar` 只用 `color-mix()` 设背景，无回退 | P1 兼容性：不支持 `color-mix` 的浏览器会丢掉背景，粘性栏透出后方内容 | 该声明前新增不透明 `background:var(--surface-canvas)` 回退；不支持的浏览器在解析阶段丢弃 `color-mix` 声明而沿用回退 | 见 `site/assets/styles.css` 第 5 节 |
+
+复验命令与结果（均为本轮实际输出）：
+
+```bash
+npm run check   # PASS：{projects:51,githubLinks:49,uniqueGithubRepos:48,publicRepos:8,privateRepos:40,ready:48}；对比度 93 组 PASS
+npm test        # 15/15 通过
+npm run build   # dist/ 产物完整
+npm run ui:check -- --width 1440 --height 1200 --theme both   # PASS
+npm run ui:check -- --width 1024 --height 1100 --theme both   # PASS
+npm run ui:check -- --width 375  --height 812  --theme both   # PASS（补上契约 §9.8 要求的 375px 窄屏）
+```
+
+回退有效性的实测证据（Chrome 无头，读 `getComputedStyle`）：
+
+```json
+{"bg":"color(srgb 0.960784 0.964706 0.980392 / 0.88)","backdrop":"blur(8px)","supportsColorMix":true}
+```
+
+即：支持 `color-mix` 的浏览器仍取 88% 半透明画布色 + 毛玻璃（回退声明未覆盖它）；不支持的浏览器则得到实色画布，绝不透出。
+
+仍未覆盖（已知限制，未变）：Safari/Firefox 实测、像素级视觉回归、打印样式、>1440px 超宽屏。
+
 已验证限制：
 
 - 未做像素级视觉回归（本项目暂无截图基线）；也未在本机以外浏览器（Safari/Firefox）实测，仅使用了标准 CSS（`conic-gradient`、`color-mix`、`backdrop-filter`）并在 Chrome 上验证。
-- `color-mix(in srgb, var(--surface-canvas) 88%, transparent)` 用于命令栏背景，在不支持该函数的浏览器上会回退为未设背景（仍可读，但粘性栏后方内容会透出）。若要严格回退，可将该行改为固定色值。
+- `color-mix(in srgb, var(--surface-canvas) 88%, transparent)` 用于命令栏背景。原实现无回退，不支持该函数的浏览器会丢失背景导致粘性栏后方内容透出；现已在该声明前加一条不透明 `background:var(--surface-canvas)` 回退（不支持的浏览器在解析阶段丢弃 `color-mix` 声明，回退为实色画布，绝不透出）。
 - 未验证打印样式与超宽屏（>1440px）的视觉表现。
