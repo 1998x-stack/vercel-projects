@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "category": "media-knowledge",
+  "projects": [
+    {
+      "name": "gu-heng-speaksof-good-books",
+      "github": {
+        "full_name": "1998x-stack/GuHengSpeaksofGoodBooks",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "从项目命名和 Vercel Git 关联可确认是书籍音频相关项目；最近有音频知识管线开发分支触发大量预览部署。",
+      "stack": "未全面核验",
+      "risk": "预览部署频繁排队/取消，需区分正常提交触发与异常构建风暴。",
+      "next": "检查部署忽略规则、生产分支、音频授权与日志。",
+      "evidence": "vercel-metadata",
+      "last_deployment": {
+        "state": "READY",
+        "target": "preview/unspecified",
+        "created_at": "2026-11-19T03:20:20.927Z",
+        "deployment_id": "dpl_xu7z6S8LQhKntDLWBXkqn7fCyWcK"
+      },
+      "site_url": "https://gu-heng-speaksof-good-books.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "ted",
+      "github": {
+        "full_name": "1998x-stack/TED",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "仓库 README 主要列出 TED 历史演讲对应 PDF 索引，而非规范化软件架构说明。",
+      "stack": "资料索引（网站实现未核验）",
+      "risk": "演讲文稿/资料再分发的版权与许可需核验。",
+      "next": "明确站点公开展示内容及 PDF 授权，建立检索元数据。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T05:18:27.432Z",
+        "deployment_id": "dpl_Dy3dXiKAzo2escw926asbryF3FDC"
+      },
+      "site_url": "https://ted-git-main-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "caixin-weekly",
+      "github": {
+        "full_name": "1998x-stack/caixinWeekly",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "名称表明与期刊或财经内容相关，但仓库功能与资料许可尚未核验。",
+      "stack": "未核验",
+      "risk": "期刊内容可能涉及版权限制；不应推断可以公开转载。",
+      "next": "核查内容许可、引用边界与文章入口。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-25T06:34:28.773Z",
+        "deployment_id": "dpl_CcGdsFPZNanm8bGnhHCed3j5wTdY"
+      },
+      "site_url": "https://caixin-weekly.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "lu-ke-wen",
+      "github": {
+        "full_name": "1998x-stack/luKeWen",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "据名称推测为人物相关观点或资料目录，具体材料类型未知。",
+      "stack": "未核验",
+      "risk": "采访、文章、音视频的公开转载权限待核验。",
+      "next": "检查版权来源、分类结构及搜索体验。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T05:41:41.182Z",
+        "deployment_id": "dpl_FqHsrsXqdBxtDVnVKFc7SJD9gawE"
+      },
+      "site_url": "https://lu-ke-wen.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "cat-brother-world",
+      "github": {
+        "full_name": "1998x-stack/catBrotherWorld",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "名称不足以准确识别项目用途，暂归媒体与内容类待复核。",
+      "stack": "未核验",
+      "risk": "分类可靠性较低，当前仅有项目关联证据。",
+      "next": "阅读站点入口与说明后重新分类。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T09:42:12.599Z",
+        "deployment_id": "dpl_G6TvPwp8NHJRJEVE9TSbuaeeYrzt"
+      },
+      "site_url": "https://cat-brother-world.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "see-world",
+      "github": {
+        "full_name": "1998x-stack/seeWorld",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "据名称推测为世界观察与资料展示类网页，内容范畴待确认。",
+      "stack": "未核验",
+      "risk": "外部新闻和图片应核查出处与时效。",
+      "next": "检查资料元数据、链接可用性与更新日期。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-25T06:30:23.808Z",
+        "deployment_id": "dpl_A55kW5mGdVv81NAoqDFg9h1Qan2d"
+      },
+      "site_url": "https://see-world-git-main-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "founder-notes",
+      "github": {
+        "full_name": "1998x-stack/FounderNotes",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "据名称推测为创始人笔记或创业知识站，具体结构未核验。",
+      "stack": "未核验",
+      "risk": "缺少可确认的知识版权与数据更新规则。",
+      "next": "补齐 README、标签、来源与检索入口。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T07:35:02.089Z",
+        "deployment_id": "dpl_FUDUniyhfKCRvSGhuerPh8kcF549"
+      },
+      "site_url": "https://founder-notes-git-main-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "science-reference",
+      "github": {
+        "full_name": "1998x-stack/scienceReference",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "据名称推测为科学知识参考资料站，实际主题和资料范围未核验。",
+      "stack": "未核验",
+      "risk": "科学内容更新与结论证据需要可追溯。",
+      "next": "补充来源 DOI/URL、发布日期及争议提示。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:26:17.180Z",
+        "deployment_id": "dpl_J4srxsZBkkTfiyygAUM4hBWTwdny"
+      },
+      "site_url": "https://science-reference.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}
