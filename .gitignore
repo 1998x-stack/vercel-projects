@@ -1,0 +1,10 @@
+# 本地镜像的源仓库：含私有源码、媒体与账号数据，绝不进入 Public 仓库（AGENTS.md 规则 3）
+repos/
+logs/
+
+# 构建产物
+dist/
+node_modules/
+
+# 系统文件
+.DS_Store
