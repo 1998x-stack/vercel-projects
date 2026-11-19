@@ -414,7 +414,7 @@
 - **GitHub：** [1998x-stack/energyFrontiersReport](https://github.com/1998x-stack/energyFrontiersReport)（private）；[Vercel 控制台](https://vercel.com/xiemings-projects/energy-frontiers-report)。
 - **技术证据：** 直接核对了 `index.html`、`scripts.js`、`data.js`、`convert.py` 和 Git Tree；音频与 HTML 资产总计约 472 MiB。依据级别 `source-inspection`，不表示已核验课程原文版权。
 - **最近生产部署：** `READY`；目标 `production`；时间 2025-06-12T03:21:49.176Z；尚未更新至最新 PR。
-- **代码优化进度：** [源仓 PR #1](https://github.com/1998x-stack/energyFrontiersReport/pull/1) 已实现课程实际统计、全文标题检索、上一节/下一节、错误状态、移动端和无障碍及 CI，但当前**未合并**。该最终提交 Vercel Preview `READY`，GitHub Actions 在私有仓库启动前连续失败，未分配 runner，无实际测试执行。
+- **代码优化进度：** [源仓 PR #1](https://github.com/1998x-stack/energyFrontiersReport/pull/1) 已实现课程实际统计、全文标题检索、上一节/下一节、错误状态、移动端和无障碍及 CI，但当前**未合并**。最新提交 `1e38c3cd` 的 Vercel Preview `READY`（`dpl_2rDJ4YYSasGzKg3kBxc8dYhxfSS8`），GitHub Actions 在私有仓库启动前多次失败，未分配 runner，无实际测试执行。
 - **P0 风险：** 私有仓库不代表生产域名私有；课程复制与音频网上传播授权未验证。Vercel 原 SSO 主要覆盖 Preview/生成部署 URL，生产主域名公开性尚未独立检查。
 - **下一步：** 确认课程内容授权/私有访问策略，排查 GitHub Actions 账户/计费/runner 状态，完成真实音频与手机 E2E；在通过质量门禁前不要声称代码已发布。
 - **专项审计：** [历史课程平台与部署风险](iterations/energy-frontiers-archive-2026-11-19.md)。
