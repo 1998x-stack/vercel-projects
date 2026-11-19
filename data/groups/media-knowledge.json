@@ -9,21 +9,36 @@
         "visibility": "private"
       },
       "category": "media-knowledge",
-      "summary": "从项目命名和 Vercel Git 关联可确认是书籍音频相关项目；最近有音频知识管线开发分支触发大量预览部署。",
-      "stack": "未全面核验",
-      "risk": "预览部署频繁排队/取消，需区分正常提交触发与异常构建风暴。",
-      "next": "检查部署忽略规则、生产分支、音频授权与日志。",
-      "evidence": "vercel-metadata",
+      "summary": "53 个系列、273 MP3、274 HTML 的私有历史读书课程档案，包含离线优先的本地 Whisper ASR、SQLite FTS5、证据引用的 LLM 文章与问答工程。",
+      "stack": "静态 HTML/CSS/JS + Python 3.10+、SQLite FTS5、faster-whisper、OpenAI-compatible LLM API（本地可选）；历史课程素材合计约 3.545 GiB。",
+      "risk": "媒体可能受第三方版权保护。GitHub Private 不等于 Vercel 固定生产域名受保护；当前标准 SSO 保护并非 All Deployments。新 PR #2 修复 ASR 路径安全与跨系列搜索/移动端，但 CI 在分配 runner 前失败，零测试步骤，不能直接合并。",
+      "next": "确认课程网络传播授权和生产访问范围，排查 GitHub 私有仓库 Runner/Actions 账户侧问题；本地执行 Python、Node 和移动端测试后审查并合并源 PR，再验证新 Production。",
+      "evidence": "source-inspection",
       "last_deployment": {
         "state": "READY",
-        "target": "preview/unspecified",
-        "created_at": "2026-11-19T03:20:20.927Z",
-        "deployment_id": "dpl_xu7z6S8LQhKntDLWBXkqn7fCyWcK"
+        "target": "production",
+        "created_at": "2026-11-19T05:39:14.731Z",
+        "deployment_id": "dpl_HA8DqQXMDbUbeYHSva5YoZuR7vFp"
       },
       "site_url": "https://gu-heng-speaksof-good-books.vercel.app",
       "account": "xiemings-projects",
       "checked_at": "2026-11-19",
-      "query_error": null
+      "query_error": null,
+      "review": {
+        "date": "2026-11-19",
+        "source_pr": "https://github.com/1998x-stack/GuHengSpeaksofGoodBooks/pull/2",
+        "head": "309b6581350ef2a350da5ab2df887b4c03716fff",
+        "release_status": "NOT_MERGED",
+        "ci_run": "https://github.com/1998x-stack/GuHengSpeaksofGoodBooks/actions/runs/44469197348",
+        "ci_status": "RUNNER_NOT_STARTED",
+        "preview_verified": false,
+        "production_updated": false,
+        "rights_verified": false,
+        "series": 53,
+        "mp3": 273,
+        "html": 274,
+        "media_bytes": 3806860065
+      }
     },
     {
       "name": "ted",
