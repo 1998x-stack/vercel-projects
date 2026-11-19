@@ -1,0 +1,16 @@
+{
+  "name": "vercel-projects-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Auditable Vercel portfolio directory and static GitHub Pages frontend",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node scripts/validate.mjs",
+    "build": "node scripts/validate.mjs && node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "license": "MIT"
+}
