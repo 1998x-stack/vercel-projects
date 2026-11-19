@@ -493,13 +493,14 @@
 
 ### india-supply-chain-watch-2po3
 
-- **定位：** 印度产业政策、PCB、半导体和跨境投资研究平台；已完成生产部署加固、来源新鲜度提示和公开数据隐私治理。
+- **定位：** 印度电子制造与跨境政策资料索引，研究库 31 条、选择性获批项目记录 20 条；不作为实时全行业统计。
 - **GitHub：** [1998x-stack/india-supply-chain-watch](https://github.com/1998x-stack/india-supply-chain-watch)（public）；[Vercel 控制台](https://vercel.com/xiemings-projects/india-supply-chain-watch-2po3)。
-- **技术证据：** Next.js 15.5、React 19、Prisma 6；GitHub CI 已运行生产构建与 12 条只读 HTTP 冒烟，来源 README/实际构建日志。
-- **最近部署：** `READY`；目标：`production`；提交 `a57a3f5`；部署 `dpl_CSRTrMDTpsqZrAbpF9WjbUVmQgcf`；时间：2026-11-19T04:01:29.656Z。
-- **本轮修复：** 新增公开健康接口、CI HTTP 冒烟、30 天资料过期提示、sitemap 来源核验日期修正，防止公开页面泄露内部 `editorNote`。
-- **风险：** 研究资料上次核验为 2026-09-24；外部公网 HTTP、生产数据库、验证码和审核工作流仍未验收。生产 READY 不意味着可公开访问。
-- **建议：** 按 [专项迭代报告](iterations/india-supply-chain-watch-2026-11-19.md) 进行公开域名/业务健康验证及研究资料更新，安全门禁完成之前保持投稿功能关闭。
+- **技术证据：** Next.js 15.5、React 19、Prisma 6；CI 已通过内容核验、CSV 一致性、TypeScript、生产构建和 12 路由只读 HTTP 冒烟。
+- **最近部署：** `READY`；环境 `production`；commit `42672baa`；部署 `dpl_4k5R3MqmL8rduESvPCg2mDrjqPM3`；时间 2026-11-19T04:15:10.747Z。
+- **研究增量：** 新增 2026-11-06 ECMS 12 项获批申请与累计 118 项统计、2026-09-25 PCB Tools Final Findings 进度、2026-08-21 印度 FDI 修订框架实施情况；三个专题同步更新。详情 [专项来源复核](iterations/india-watch-official-source-refresh-2026-11-19.md)。
+- **已修复：** JSON→CSV 自动生成与 CI 漂移检查、历史来源逐条核验日期显示、静态来源回归测试。
+- **保留风险：** 28 条历史研究记录仍保留 2026-09-24 旧核验日期；匿名公网访问、真实 PostgreSQL、Turnstile 和管理审核未完成独立测试。
+- **建议：** 执行外部生产网站验活，复核早期政策来源，谨慎启用投稿和完善依赖锁文件；不要将平台 READY 误作所有业务功能已验证。
 
 ### shanghai-map
 
