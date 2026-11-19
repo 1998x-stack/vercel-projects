@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "category": "finance-policy",
+  "projects": [
+    {
+      "name": "investment-reference",
+      "github": {
+        "full_name": "1998x-stack/investmentReference",
+        "visibility": "private"
+      },
+      "category": "finance-policy",
+      "summary": "按项目名推测为投资参考资料站；仓库 README 未核验到可用说明。",
+      "stack": "未核验",
+      "risk": "金融内容更新和免责声明缺失风险；不应当作投资建议。",
+      "next": "检查数据来源、时效性、风险提示和用户输入处理。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:30:40.436Z",
+        "deployment_id": "dpl_9gyMLDRvoeAmwPaMtJDHTwFXpfvU"
+      },
+      "site_url": "https://investment-reference.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "market",
+      "github": {
+        "full_name": "1998x-stack/market",
+        "visibility": "private"
+      },
+      "category": "finance-policy",
+      "summary": "依据项目名推测为市场信息展示项目；业务类型尚待仓库内容核实。",
+      "stack": "未核验",
+      "risk": "可能与投资参考及商业参考项目有信息重复。",
+      "next": "明确数据市场范围、接口来源与更新频率。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:31:15.330Z",
+        "deployment_id": "dpl_DDFczgHYexLAGpCjK1cQQat3wD8T"
+      },
+      "site_url": "https://market-git-main-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "retirement-policy",
+      "github": {
+        "full_name": "1998x-stack/retirementPolicy",
+        "visibility": "private"
+      },
+      "category": "finance-policy",
+      "summary": "退休政策及养老金测算类网页，README 描述退休年龄时间表、公式与地区比较。",
+      "stack": "HTML/CSS/JS（仓库说明）",
+      "risk": "政策具有时效和适用条件；页面数值不等同官方个体待遇核定。",
+      "next": "逐条核对最新政策文本、公式、参数及来源日期。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-09T16:13:27.005Z",
+        "deployment_id": "dpl_6xAWVwTSEHdRCsZyezEdqZWbQbAR"
+      },
+      "site_url": "https://retirement-policy.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "salary-calculator",
+      "github": {
+        "full_name": "1998x-stack/myMoney",
+        "visibility": "public"
+      },
+      "category": "finance-policy",
+      "summary": "Vercel 项目名为 salary-calculator，但 GitHub README 表明其仓库是个人记账和理财单页应用。",
+      "stack": "原生 HTML/CSS/JS",
+      "risk": "项目名称与代码仓库定位不一致，可能连接了错误仓库。",
+      "next": "先确认部署页面是否工资计算器，再决定更名或调整 Git 绑定。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2026-08-18T09:10:29.198Z",
+        "deployment_id": "dpl_5Ca1Jz42VSw3pYARXFoqJhZ9rhmg"
+      },
+      "site_url": "https://salary-calculator-lemon-five.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "the-road-to-wealth-freedom-revolution",
+      "github": {
+        "full_name": "1998x-stack/theRoadToWealthFreedomRevolution",
+        "visibility": "private"
+      },
+      "category": "finance-policy",
+      "summary": "根据仓库名推测为财富自由主题知识或教育项目，内容尚待确认。",
+      "stack": "未核验",
+      "risk": "个人财务相关内容应区分教育材料与具体财务建议。",
+      "next": "核查内容、资料出处、许可及维护计划。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-18T07:55:53.579Z",
+        "deployment_id": "dpl_HEmrPPf7XVqLc3mw9z3xSoYgD29R"
+      },
+      "site_url": "https://the-road-to-wealth-freedom-revoluti.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}
