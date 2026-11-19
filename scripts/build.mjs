@@ -1,0 +1,11 @@
+import { cpSync, rmSync, mkdirSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+const root=dirname(dirname(fileURLToPath(import.meta.url)));
+const output=join(root,"dist");
+rmSync(output,{force:true,recursive:true});
+mkdirSync(output,{recursive:true});
+cpSync(join(root,"site"),output,{recursive:true});
+cpSync(join(root,"data"),join(output,"data"),{recursive:true});
+writeFileSync(join(output,".nojekyll"),"\n");
+console.log("GitHub Pages artifact ready:",output);
