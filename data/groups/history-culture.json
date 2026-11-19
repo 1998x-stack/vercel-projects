@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "category": "history-culture",
+  "projects": [
+    {
+      "name": "history-of-world-civilization",
+      "github": {
+        "full_name": "1998x-stack/historyOfWorldCivilization",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "按名称推测为世界文明史浏览或整理项目，内容结构尚待核验。",
+      "stack": "未核验",
+      "risk": "历史主题涉及来源与解释分歧，不能将未审资料视为史实结论。",
+      "next": "检查时间轴、史料出处、学术引用与内容授权。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:05:27.438Z",
+        "deployment_id": "dpl_6VQ2M6HX63DpZttnfy6Knh3CUqNV"
+      },
+      "site_url": "https://history-of-world-civilization.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "historical-records",
+      "github": {
+        "full_name": "1998x-stack/historicalRecords",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "历史记录主题项目；与 historical-records-lu26 关联同一个 GitHub 仓库。",
+      "stack": "未核验",
+      "risk": "两个 Vercel 项目共享 GitHub 源码，存在重复发布和域名分叉风险。",
+      "next": "比较环境变量、域名与历史版本，确认两个站是否都要保留。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T01:43:30.829Z",
+        "deployment_id": "dpl_8JcyLi66ECH6Sw4M3fWVin1cZ4fL"
+      },
+      "site_url": "https://historical-records.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "historical-records-lu26",
+      "github": {
+        "full_name": "1998x-stack/historicalRecords",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "与 historical-records 相同的 GitHub 代码源，可能是历史部署或独立发布入口。",
+      "stack": "未核验",
+      "risk": "共享源码不代表部署内容或配置完全相同，需逐项目对照。",
+      "next": "核对部署分支、预览域名及是否需要合并项目。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T01:43:30.819Z",
+        "deployment_id": "dpl_AEq3oo2FScGNcPmAL3uBryDXQfjf"
+      },
+      "site_url": "https://historical-records-lu26.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "modern-history",
+      "github": {
+        "full_name": "1998x-stack/modernHistory",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "根据仓库名推测为近现代史资料展示项目，文献范围未核验。",
+      "stack": "未核验",
+      "risk": "资料年代跨度及来源需明确。",
+      "next": "核查专题划分、史料出处与数据校核。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-11T16:39:11.656Z",
+        "deployment_id": "dpl_8sYfRidxCHEDPvQtDeRrTEq94ryP"
+      },
+      "site_url": "https://modern-history.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "european-history",
+      "github": {
+        "full_name": "1998x-stack/EuropeanHistory",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "根据仓库名推测为欧洲历史内容站，实际目录与内容来源待核验。",
+      "stack": "未核验",
+      "risk": "可能涉及历史地图或译文版权问题。",
+      "next": "检查地图、引文和可视化资料的使用权。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:04:59.418Z",
+        "deployment_id": "dpl_HzBDNJwe9PUUdMnBFpuo6xyGq2ym"
+      },
+      "site_url": "https://european-history.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "brief-history-of-russia",
+      "github": {
+        "full_name": "1998x-stack/briefHistoryOfRussia",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "根据仓库名推测为俄罗斯历史主题知识站，内容真实性需独立验证。",
+      "stack": "未核验",
+      "risk": "历史叙述需要区分事件事实与争议观点。",
+      "next": "建立来源、时间、争议字段并审查素材授权。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:29:04.490Z",
+        "deployment_id": "dpl_FtkcR2aVFQkEtnyTejg5Po7qKD1A"
+      },
+      "site_url": "https://brief-history-of-russia.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "theory-of-evolution",
+      "github": {
+        "full_name": "1998x-stack/theoryOfEvolution",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "仓库 README 明确当前只有占位内容，尚无完整网站源码。",
+      "stack": "空仓库占位（README）",
+      "risk": "此前生产部署 BLOCKED；当前缺乏可构建的真实网站内容。",
+      "next": "先补充最小可用知识站及资料来源，再审查首次发布。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "BLOCKED",
+        "target": "production",
+        "created_at": "2026-08-18T09:32:01.337Z",
+        "deployment_id": "dpl_Do7NdoDxWUa5RyJFt39FZzyyE2AC"
+      },
+      "site_url": "https://theory-of-evolution-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "dragon-slaying-techniques",
+      "github": {
+        "full_name": "1998x-stack/dragonSlayingTechniques",
+        "visibility": "private"
+      },
+      "category": "history-culture",
+      "summary": "根据项目名无法可靠判断业务范围；暂归文化/知识类待复核。",
+      "stack": "未核验",
+      "risk": "标题含义模糊，分类可信度低。",
+      "next": "读取仓库实际入口与内容，再确认分类归属。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-25T06:21:36.996Z",
+        "deployment_id": "dpl_6EPRA5DsMedgTrXkPPWktMhP2jfW"
+      },
+      "site_url": "https://dragon-slaying-techniques.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}
