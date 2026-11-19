@@ -43,7 +43,7 @@
 - **Shanghai School**：HTML/JS 静态站点，旧生产构建失败；后续应复核 2024 年历史学校数据和在线访问。
 - **Emotional Expert**：历史生产部署出现 BLOCKED，不能因新预览构建 READY 就判定生产恢复。
 - **Theory of Evolution**：GitHub 当前只有占位 README；缺少实际站点内容，最近部署仍 BLOCKED。
-- **India Supply Chain Watch**：MVP 存在 Next.js/Prisma 代码，需分别验收静态资讯和需要数据库的投稿流程。
+- **India Supply Chain Watch（2026-11-19 已完成首轮工程迭代）**：GitHub PR 已合并，Next.js 生产构建及 12 条本地 HTTP 冒烟测试通过；Vercel Production 新部署 `READY`。已增加资料时效提示、健康接口、隐私保护和部署手册，公网 HTTP 与投稿数据库尚待独立验收。详见 [专项优化报告](docs/iterations/india-supply-chain-watch-2026-11-19.md)。
 - **重复仓库：** `historical-records` 与 `historical-records-lu26` 同时关联 `historicalRecords`。
 - **名称/源码定位差异：** `salary-calculator` 关联 `myMoney`，后者 README 描述为个人记账应用。
 
