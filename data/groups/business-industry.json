@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "category": "business-industry",
+  "projects": [
+    {
+      "name": "business-reference",
+      "github": {
+        "full_name": "1998x-stack/businessReference",
+        "visibility": "private"
+      },
+      "category": "business-industry",
+      "summary": "据项目名推测为商业参考资料站，尚缺可核验功能说明。",
+      "stack": "未核验",
+      "risk": "内容更新、数据来源和适用范围未知。",
+      "next": "核查仓库目录、入口页面、引用及页面访问。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:35:56.421Z",
+        "deployment_id": "dpl_8Nxsh7QHYtG9dyZtcnQ6DK9xZ3cC"
+      },
+      "site_url": "https://business-reference.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "business-reference2",
+      "github": {
+        "full_name": "1998x-stack/businessReference2",
+        "visibility": "private"
+      },
+      "category": "business-industry",
+      "summary": "商业参考资料的第二版本或独立项目；版本关系未核实。",
+      "stack": "未核验",
+      "risk": "与 business-reference 可能重复，但不应按名称直接合并。",
+      "next": "比较两仓库实际内容、域名及用户用途，再确定保留策略。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2026-10-01T13:20:48.760Z",
+        "deployment_id": "dpl_7MPSBP7FSQeuGCPWiLF81ZB9JUiP"
+      },
+      "site_url": "https://business-reference2.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "manufacturing-industry",
+      "github": {
+        "full_name": "1998x-stack/manufacturingIndustry",
+        "visibility": "private"
+      },
+      "category": "business-industry",
+      "summary": "据名称推测为制造业知识或信息展示项目，具体内容未核实。",
+      "stack": "未核验",
+      "risk": "产业数据的年份、来源与完整性待审。",
+      "next": "检查是否具有可追溯指标、分类和数据更新机制。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:44:52.627Z",
+        "deployment_id": "dpl_4iHR2qUUtaFVjLoYdhAYeyghXjKe"
+      },
+      "site_url": "https://manufacturing-industry.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "consumer-product-cases",
+      "github": {
+        "full_name": "1998x-stack/consumerProductCases",
+        "visibility": "private"
+      },
+      "category": "business-industry",
+      "summary": "据名称推测为消费品案例目录，案例真实性及覆盖范围未核验。",
+      "stack": "未核验",
+      "risk": "缺少可确认的案例口径及来源记录。",
+      "next": "清点案例、来源 URL、时间戳与可检索性。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:34:58.696Z",
+        "deployment_id": "dpl_D7vJYTvHEZfd2BS2oRDVbeZ3ZFYS"
+      },
+      "site_url": "https://consumer-product-cases.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "key-account-salesperson",
+      "github": {
+        "full_name": "1998x-stack/keyAccountSalesperson",
+        "visibility": "private"
+      },
+      "category": "business-industry",
+      "summary": "据名称推测为大客户销售知识或工具站，具体功能待核验。",
+      "stack": "未核验",
+      "risk": "不能仅凭项目名称认定存在 CRM 或业务数据处理。",
+      "next": "核查是否包含个人信息、销售流程和访问保护。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:22:02.084Z",
+        "deployment_id": "dpl_3UyKtZwW7QK6NuTjrgBZDqUmcLf7"
+      },
+      "site_url": "https://key-account-salesperson.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "lean-management",
+      "github": {
+        "full_name": "1998x-stack/leanManagement",
+        "visibility": "private"
+      },
+      "category": "business-industry",
+      "summary": "据名称推测为精益管理方法或工具站，功能尚待核验。",
+      "stack": "未核验",
+      "risk": "可能与业务参考类项目重叠，引用及版本需要清点。",
+      "next": "核对内容框架、数据来源、是否需要合并到统一知识目录。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:43:29.789Z",
+        "deployment_id": "dpl_59dGFHdJyxPxUEopqMrSuboxLuuv"
+      },
+      "site_url": "https://lean-management.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}

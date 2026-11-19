@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "category": "education-career",
+  "projects": [
+    {
+      "name": "mbti",
+      "github": {
+        "full_name": "1998x-stack/MBTI",
+        "visibility": "public"
+      },
+      "category": "education-career",
+      "summary": "PersonaQuest 情境人格探索问卷，含 12 道题、16 种画像与可解释评分；并非经验证的心理测评。",
+      "stack": "原生静态站 + Node 构建 dist/",
+      "risk": "此前 Vercel 输出目录指向 public，构建实际生成 dist；该配置已修正但新部署待核验。",
+      "next": "核验最新构建 READY 和页面加载，再核查测试结果。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "preview/unspecified",
+        "created_at": "2026-11-19T03:22:34.910Z",
+        "deployment_id": "dpl_3sUohWhdNDbTcPV93Gjjd3kej29K"
+      },
+      "site_url": "https://mbti-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "gao-kao-web",
+      "github": {
+        "full_name": "1998x-stack/GaoKaoWeb",
+        "visibility": "public"
+      },
+      "category": "education-career",
+      "summary": "面向历史高考材料的可检索学科知识地图，包含原始 PDF 归档。",
+      "stack": "Node 构建静态站点",
+      "risk": "部分历史资料尚待核验，不应误标为当前考试范围。",
+      "next": "检查 PDF 出处、现行适用性和可达性。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "preview/unspecified",
+        "created_at": "2026-11-02T10:11:26.431Z",
+        "deployment_id": "dpl_5uaBsKYxPAk4t1DQRJjSzh7VSq3S"
+      },
+      "site_url": "https://gao-kao-web.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "shanghai-school",
+      "github": {
+        "full_name": "1998x-stack/shanghai_school",
+        "visibility": "private"
+      },
+      "category": "education-career",
+      "summary": "上海高中招生学校名录，提供检索、区域筛选与粘土拟态交互界面。",
+      "stack": "HTML/CSS/JS",
+      "risk": "当前页面引用 2024 年招生数据，内容过时风险；此前部署 ERROR，静态产物配置已调整。",
+      "next": "核验部署、修复链接占位符并更新数据年份及来源。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "preview/unspecified",
+        "created_at": "2026-11-19T03:22:56.606Z",
+        "deployment_id": "dpl_5xjvNFx45nuuvm2ukRFnZhzWKE5Q"
+      },
+      "site_url": "https://shanghai-school-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "elite-day-classes6",
+      "github": {
+        "full_name": "1998x-stack/eliteDayClasses6",
+        "visibility": "private"
+      },
+      "category": "education-career",
+      "summary": "依据仓库名推测为课程班级相关展示项目，具体范围未核验。",
+      "stack": "未核验",
+      "risk": "功能说明及内容出处不充分。",
+      "next": "核查数据、页面与静态资源是否需要维护。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:16:58.599Z",
+        "deployment_id": "dpl_5tPYb1tnshCjQ2j9sbmSiuNXgeTg"
+      },
+      "site_url": "https://elite-day-classes6.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "logic-training",
+      "github": {
+        "full_name": "1998x-stack/logicTraining",
+        "visibility": "private"
+      },
+      "category": "education-career",
+      "summary": "依据仓库名推测为逻辑训练类学习项目，功能与内容尚待核验。",
+      "stack": "未核验",
+      "risk": "不应将名称直接视为已验证的课程能力。",
+      "next": "核查题库来源、难度结构及移动端体验。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:24:03.754Z",
+        "deployment_id": "dpl_AeFzHy5jHxPPLPqj4WRYPZ2wXacT"
+      },
+      "site_url": "https://logic-training.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "job-categories",
+      "github": {
+        "full_name": "1998x-stack/jobCategories",
+        "visibility": "private"
+      },
+      "category": "education-career",
+      "summary": "2021 年版国家职业资格目录浏览系统，提供资格分类和筛选。",
+      "stack": "原生 HTML/CSS/JS",
+      "risk": "资格目录为历史版本，不能当作现行规则。",
+      "next": "核对人社部门现行职业资格目录并标注数据日期。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-09T09:02:08.743Z",
+        "deployment_id": "dpl_EHHmugJhAkKUP23YznMvYiSgroyu"
+      },
+      "site_url": "https://job-categories.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "global-think-tank-report-interpretation5",
+      "github": {
+        "full_name": "1998x-stack/globalThinkTankReportInterpretation5",
+        "visibility": "public"
+      },
+      "category": "education-career",
+      "summary": "智库报告解读课程站，采用网页课件与 MP3 资源双形态呈现。",
+      "stack": "HTML/JS + 转换脚本",
+      "risk": "引用及音频授权需要逐项核查，避免默认公开传播权限。",
+      "next": "核查资料出处、课程播放及版权边界。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2026-08-18T09:10:04.357Z",
+        "deployment_id": "dpl_AEmGEYMGAr1kC3qNB3V1NhCb5Cj9"
+      },
+      "site_url": "https://global-think-tank-report-interpreta.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}

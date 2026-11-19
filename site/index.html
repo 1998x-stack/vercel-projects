@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="1998x-stack Vercel Projects Atlas：项目分类、GitHub 关联、部署状态和逐项治理建议。">
+  <meta name="color-scheme" content="light">
+  <title>Vercel Projects Atlas · 1998x-stack</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body>
+  <a href="#explorer" class="skip-link">跳到项目目录</a>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Vercel Projects Atlas 首页">
+        <span class="brand-symbol">V<span class="brand-dot">.</span></span>
+        <span class="brand-text"><strong>VERCEL PROJECTS</strong><small>1998x-stack / Atlas</small></span>
+      </a>
+      <nav aria-label="站点导航" class="topnav">
+        <a href="#overview">总览</a><a href="#explorer">项目目录</a><a href="#methodology">审计方法</a>
+        <a href="https://github.com/1998x-stack/vercel-projects" target="_blank" rel="noopener noreferrer" class="topnav-github">GitHub ↗</a>
+      </nav>
+    </header>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="live-dot"></span> VERCEL DEPLOYMENT INTELLIGENCE</span>
+        <h1 id="hero-title">让每一个项目<br><em>都有迹可循。</em></h1>
+        <p>以 Vercel 实际项目为起点，串联 GitHub 源码、部署状态、分类、风险和改进优先级。拒绝将“已创建”误认为“已上线”。</p>
+        <div class="hero-actions"><a href="#explorer" class="primary-action">浏览全部项目 <span aria-hidden="true">↗</span></a><a href="#methodology" class="secondary-action">数据与核验标准 →</a></div>
+        <div class="hero-source">数据快照 <strong id="snapshot-date">2026-11-19</strong> <span class="separator">/</span> 团队 <strong>xiemings-projects</strong></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core">51<span>PROJECTS</span></div><span class="orbit-chip chip-a">READY</span><span class="orbit-chip chip-b">GITHUB</span><span class="orbit-chip chip-c">AUDIT</span><span class="mini-star star-a">✳</span><span class="mini-star star-b">✳</span></div>
+    </section>
+    <main>
+      <section id="overview" class="section overview" aria-labelledby="overview-heading">
+        <div class="section-top"><div><span class="section-kicker">01 / PORTFOLIO OVERVIEW</span><h2 id="overview-heading">资产概览</h2></div><p>以实时读取的时间点快照为依据，而非网页可用率实测。</p></div>
+        <div id="metrics" class="metric-grid" aria-live="polite">
+          <article class="metric"><span>Vercel 项目</span><strong id="metric-projects">—</strong><small>所有已发现的团队项目</small></article>
+          <article class="metric"><span>GitHub 关联</span><strong id="metric-linked">—</strong><small>关联数 ≠ 不同仓库数</small></article>
+          <article class="metric"><span>最近一次 READY</span><strong id="metric-ready">—</strong><small>可能包含预览部署</small></article>
+          <article class="metric"><span>需排查项目</span><strong id="metric-attention">—</strong><small>ERROR / BLOCKED / 无部署</small></article>
+        </div>
+        <div class="insight-grid">
+          <article class="panel category-panel"><div class="panel-heading"><h3>分类分布</h3><span>8 DOMAINS</span></div><div id="category-chart" class="category-chart" aria-label="各分类项目数量"></div></article>
+          <article class="panel health-panel"><div class="panel-heading"><h3>部署状态快照</h3><span>LAST DEPLOYMENT</span></div><div class="health-middle"><div id="status-ring" class="status-ring"><span id="status-ring-count">—<small>READY</small></span></div><div id="status-legend" class="status-legend"></div></div><p class="panel-footnote">状态属于最近一次部署，不保证生产域名可访问或业务测试通过。</p></article>
+        </div>
+      </section>
+      <section id="explorer" class="section catalog" aria-labelledby="catalog-heading">
+        <div class="section-top"><div><span class="section-kicker">02 / PROJECT DIRECTORY</span><h2 id="catalog-heading">项目目录</h2></div><p>逐项目查看事实、风险和下一步建议。</p></div>
+        <div class="filter-panel">
+          <div class="search-line"><label class="search" for="search-input"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="搜索项目、GitHub 仓库、功能或风险…" autocomplete="off"><kbd>/</kbd></label><button id="export-csv" class="outline-button" type="button">导出 CSV ↗</button></div>
+          <div class="filter-line"><div id="category-filters" class="filter-chips" role="group" aria-label="项目分类筛选"></div><div class="select-group"><label for="status-filter">部署</label><select id="status-filter"><option value="all">全部状态</option><option value="READY">READY</option><option value="ERROR">ERROR</option><option value="BLOCKED">BLOCKED</option><option value="QUEUED">QUEUED</option><option value="BUILDING">BUILDING</option><option value="NONE">无部署</option></select><label for="privacy-filter">仓库</label><select id="privacy-filter"><option value="all">全部</option><option value="public">Public</option><option value="private">Private</option><option value="unlinked">未关联</option></select></div></div>
+        </div>
+        <div class="results-heading"><p><strong id="results-count">—</strong> 个项目符合筛选</p><label for="sort-select">排序 <select id="sort-select"><option value="name">名称 A–Z</option><option value="recent">最近部署</option><option value="risk">风险优先</option></select></label></div>
+        <div id="project-list" class="project-list" aria-live="polite"><p class="loading">正在读取项目快照…</p></div>
+        <div id="empty-results" class="empty-results" hidden>没有匹配的项目。请修改关键词或筛选条件。</div>
+      </section>
+      <section id="methodology" class="section methodology" aria-labelledby="method-heading">
+        <div class="section-top"><div><span class="section-kicker">03 / TRANSPARENCY</span><h2 id="method-heading">核验标准</h2></div></div>
+        <div class="method-grid">
+          <article><span class="method-number">01</span><h3>数据可追溯</h3><p>Vercel 读取项目配置及最近部署；GitHub 核对关联仓库和部分 README。资料缺失时明确标记，不据名称臆断功能。</p></article>
+          <article><span class="method-number">02</span><h3>状态不冒充健康</h3><p>READY、ERROR、BLOCKED 是构建或部署记录。真实 HTTP 可达性、用户登录和业务流程需要独立检查。</p></article>
+          <article><span class="method-number">03</span><h3>私有源码边界</h3><p>目录中包含用户明确指定公开整理的私有仓库名称及关联关系，不发布源码、密钥、内部日志或环境变量。</p></article>
+          <article><span class="method-number">04</span><h3>快照并非监控</h3><p>所有状态均为带日期的审计快照，不进行未经授权的持续账号访问，不推断当前在线或可访问状态。</p></article>
+        </div>
+        <div class="method-footer">完整方法、公开边界与可复现校验：<a href="https://github.com/1998x-stack/vercel-projects/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener noreferrer">METHODOLOGY.md ↗</a></div>
+      </section>
+    </main>
+    <footer class="footer"><span class="footer-brand">VP<span>.</span></span><p>Vercel Projects Atlas · An auditable catalog, not a uptime claim.</p><a href="https://github.com/1998x-stack/vercel-projects" target="_blank" rel="noopener noreferrer">SOURCE ON GITHUB ↗</a></footer>
+  </div>
+  <div id="drawer-overlay" class="drawer-overlay" hidden></div>
+  <aside id="inspector" class="inspector" role="dialog" aria-modal="true" aria-label="项目详情" aria-hidden="true" tabindex="-1">
+    <div class="inspector-header"><span>PROJECT INSPECTION / 项目审计</span><button id="drawer-close" type="button" aria-label="关闭项目详情">×</button></div>
+    <div id="inspector-content"></div>
+  </aside>
+  <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

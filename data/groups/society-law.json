@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "category": "society-law",
+  "projects": [
+    {
+      "name": "civil-law",
+      "github": {
+        "full_name": "1998x-stack/civilLaw",
+        "visibility": "private"
+      },
+      "category": "society-law",
+      "summary": "根据仓库名称推测为民法知识站，实际资料范围和法律版本未核验。",
+      "stack": "未核验",
+      "risk": "法律内容具有地区及时间适用性，不能替代专业意见。",
+      "next": "核对法条出处、施行日期、修订历史及站内免责声明。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:27:06.689Z",
+        "deployment_id": "dpl_FSLPbwKY2Shgu4orM3KFzFG8esKh"
+      },
+      "site_url": "https://civil-law.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "labor-law",
+      "github": {
+        "full_name": "1998x-stack/laborLaw",
+        "visibility": "private"
+      },
+      "category": "society-law",
+      "summary": "根据仓库名称推测为劳动法资料站，具体功能尚未验证。",
+      "stack": "未核验",
+      "risk": "劳动争议及社保政策需要标明时效和地域。",
+      "next": "核验法律依据、典型案例来源及发布时间。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T01:59:23.951Z",
+        "deployment_id": "dpl_BCLyKZoygT6s7AirGS24PtRaNowv"
+      },
+      "site_url": "https://labor-law.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "political-affairs-hall",
+      "github": {
+        "full_name": "1998x-stack/politicalAffairsHall",
+        "visibility": "private"
+      },
+      "category": "society-law",
+      "summary": "依据项目名推测为时政政策知识类网页；缺少可确认的内容说明。",
+      "stack": "未核验",
+      "risk": "时政内容更新频繁，不应推断立场或事实准确性。",
+      "next": "核对资料来源、编辑范围、历史版本与内容更新策略。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-25T06:14:09.080Z",
+        "deployment_id": "dpl_GWnZ297fKuEryJfvcWyGbLDVxfUy"
+      },
+      "site_url": "https://political-affairs-hall.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "the-great-learning-commission4",
+      "github": {
+        "full_name": "1998x-stack/theGreatLearningCommission4",
+        "visibility": "private"
+      },
+      "category": "society-law",
+      "summary": "根据项目名称推测为教育、学习或政务主题内容站，具体定位待核验。",
+      "stack": "未核验",
+      "risk": "名称容易造成与官方机构的误解。",
+      "next": "核查页面品牌表述、免责声明和实际内容归属。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T02:59:12.368Z",
+        "deployment_id": "dpl_GNJrGQdgNotZ32UTH5G4fPBbCb9W"
+      },
+      "site_url": "https://the-great-learning-commission4.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "emotional-expert",
+      "github": {
+        "full_name": "1998x-stack/emotionalExpert",
+        "visibility": "private"
+      },
+      "category": "society-law",
+      "summary": "静态情绪与情感知识网站，通过文章目录和 Python 脚本构建数据索引。",
+      "stack": "HTML/CSS/JS + Python 数据脚本",
+      "risk": "此前最新生产部署 BLOCKED，已调整静态构建配置并发起预览验证；不能视为生产恢复。",
+      "next": "查看预览构建和 PDF/文章资源可达性，再决定生产发布。",
+      "evidence": "readme",
+      "last_deployment": {
+        "state": "READY",
+        "target": "preview/unspecified",
+        "created_at": "2026-11-19T03:22:59.879Z",
+        "deployment_id": "dpl_AqBZJwsDYCUL9WvwuHvhtt2UQSyE"
+      },
+      "site_url": "https://emotional-expert-xiemings-projects.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    },
+    {
+      "name": "communication-studies",
+      "github": {
+        "full_name": "1998x-stack/communicationStudies",
+        "visibility": "private"
+      },
+      "category": "society-law",
+      "summary": "依名称推测为传播学知识展示，尚未核实目录或文献内容。",
+      "stack": "未核验",
+      "risk": "文献许可、引用和全文复制风险待核查。",
+      "next": "抽检出处、引用、目录结构及使用权限。",
+      "evidence": "name-only",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:17:31.258Z",
+        "deployment_id": "dpl_E3pQotmuz3Qwc2dc6jkS42shGwri"
+      },
+      "site_url": "https://communication-studies.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null
+    }
+  ]
+}
