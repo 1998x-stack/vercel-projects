@@ -74,12 +74,14 @@
 
 ### text-compare
 
-- **定位：** 本地优先的文本比较工具，使用 Myers 差异对齐、Web Worker 与虚拟化列表处理长文本。
+- **定位：** 浏览器本地优先文本/Markdown/JSON 对比工具。正式 Next.js 工程在 `text-compare-tool/`，仓库根目录旧 HTML 为历史原型。
 - **GitHub：** [1998x-stack/TextCompare](https://github.com/1998x-stack/TextCompare)（private）；[Vercel 控制台](https://vercel.com/xiemings-projects/text-compare)。
-- **技术证据：** Next.js（子目录 text-compare-tool/）；依据级别：`readme`。
-- **最近部署：** `READY`；目标：`preview/unspecified`；时间：2026-11-03T06:30:21.217Z。
-- **风险：** 需确认 Vercel Root Directory 是否指向实际应用目录。
-- **建议：** 核验大文本性能、预览与生产的子目录构建。
+- **技术证据：** 核对源码结构、GitHub PR #6、四个 CI Job 的具体结果、Vercel Build Logs；依据级别 `source-inspection`。
+- **既有生产部署：** `READY`，`production`，`dpl_AWvCibxXsfGebW4r5JhhmwQ6zNa9`，对应旧主分支 `0eeccc67`。其构建按仓库根目录静态原型，不能认定展示了 V1.0 Next.js 应用。
+- **部署修正实证：** Vercel 项目已配置 `framework=nextjs` 与 `rootDirectory=text-compare-tool`；重新创建的 Preview `dpl_DcF3T91zNTwd4ELo2Votz6a1GCDW` 对应提交 `2bba6523`，日志显示真实 `pnpm install`、`next build`、Next.js 主页静态生成，最终 `READY`；未验证外部真实浏览器匿名 HTTP。
+- **源码优化：** [PR #6](https://github.com/1998x-stack/TextCompare/pull/6) 已实现 JSON/Markdown 结构比较、独立评测、文件导入、Worker/虚拟滚动；历史 SHA `2bba6523` 的 [CI 四项全部 SUCCESS](https://github.com/1998x-stack/TextCompare/actions/runs/41590300148)。最新 PR SHA `4fbc887d` 内容树与该历史成功提交完全相同，但最新 Actions 再次在 runner 分配前失败（零步骤），PR **仍 OPEN/NOT MERGED**。
+- **新的 P0 安全门禁：** Next.js 官方 2026-11-03 发布 `15.5.29` 安全维护版，而 PR 锁定 `15.5.28`。尝试生成对应冻结锁文件时 Actions runner 未启动，临时改动已以保留历史的回滚提交撤销，不允许以错配的 lockfile 合并/生产。
+- **下一步：** 修复私有仓库 Actions/runner，正式更新 Next.js 和 eslint-config-next 至 `15.5.29` 并重新生成 `pnpm-lock.yaml`，重新运行全套单测、评估、Playwright 和依赖审计；完成真实 Preview/生产访问验证后再 squash merge 与发布。详见 [专项审计报告](iterations/textcompare-nextjs-deployment-2026-11-19.md)。
 
 ### v0-ai-chat-interface
 
