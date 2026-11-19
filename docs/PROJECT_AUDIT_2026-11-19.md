@@ -448,12 +448,13 @@
 
 ### gu-heng-speaksof-good-books
 
-- **定位：** 从项目命名和 Vercel Git 关联可确认是书籍音频相关项目；最近有音频知识管线开发分支触发大量预览部署。
+- **定位：** 53 个系列、273 MP3、274 HTML 的私有历史读书课程档案，具备离线优先的 Whisper ASR、SQLite FTS5 与证据化 LLM 文章/问答代码；**不代表已经完成全量转写**。
 - **GitHub：** [1998x-stack/GuHengSpeaksofGoodBooks](https://github.com/1998x-stack/GuHengSpeaksofGoodBooks)（private）；[Vercel 控制台](https://vercel.com/xiemings-projects/gu-heng-speaksof-good-books)。
-- **技术证据：** 未全面核验；依据级别：`vercel-metadata`。
-- **最近部署：** `READY`；目标：`preview/unspecified`；时间：2026-11-19T03:20:20.927Z。
-- **风险：** 预览部署频繁排队/取消，需区分正常提交触发与异常构建风暴。
-- **建议：** 检查部署忽略规则、生产分支、音频授权与日志。
+- **技术证据：** 已阅读源码、53 系列索引和 CI，依据 `source-inspection`；原始课程约 3.545 GiB，未读取正文/音频并未核实转载许可。
+- **最近生产部署：** `READY`，`production`，commit `34d91016`，`dpl_HA8DqQXMDbUbeYHSva5YoZuR7vFp`，日期 2026-11-19。
+- **待合并源码 PR：** [#2](https://github.com/1998x-stack/GuHengSpeaksofGoodBooks/pull/2) 为 `OPEN`，修复 ASR 路径围栏、数据库污染/符号链接安全回归、跨系列搜索、移动端分类操作，以及无需下载 3.545 GiB 的 CI sparse checkout。
+- **阻断：** [Actions Run 44469197348](https://github.com/1998x-stack/GuHengSpeaksofGoodBooks/actions/runs/44469197348) 在 runner 分配前失败、0 个测试步骤，不能宣称代码已通过验收；尚未核实最终 SHA 的 Vercel Preview。
+- **风险与下一步：** GitHub Private 不意味着固定 Vercel 生产域名需要登录；课程传播权、生产访问保护及真实音频/模型流水线尚未验收。参见 [专项审计](iterations/gu-heng-audio-knowledge-2026-11-19.md)。
 
 ### lu-ke-wen
 
