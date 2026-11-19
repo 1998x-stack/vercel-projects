@@ -29,7 +29,7 @@
       "name": "ceqt-simple",
       "github": {
         "full_name": "1998x-stack/CEQTSimple",
-        "visibility": "private"
+        "visibility": "public"
       },
       "category": "tools-productivity",
       "summary": "四象限任务管理的轻量版，前端可离线运行，提供可选 Python 后端及 LLM 增强。",
