@@ -21,7 +21,7 @@ test("duplicate GitHub mappings are preserved as separate Vercel projects",()=>{
 
 test("every record has a distinct identity and a traceable evidence level",()=>{
  assert.equal(new Set(projects.map(p=>p.name)).size,51);
- const allowed=new Set(["readme","name-only","vercel-only","vercel-metadata"]);
+ const allowed=new Set(["readme","name-only","vercel-only","vercel-metadata","source-inspection"]);
  for(const p of projects){assert.ok(allowed.has(p.evidence),p.name);assert.ok(p.summary.length>10,p.name)}
 });
 
