@@ -44,21 +44,32 @@
         "visibility": "public"
       },
       "category": "research-geo",
-      "summary": "纯前端上海地图网页，提供基础地图展示与浏览器交互。",
-      "stack": "HTML/CSS/JS",
-      "risk": "地图数据、版权署名及地理信息更新时间需确认。",
-      "next": "检测底图来源与脚本加载、移动端交互。",
+      "summary": "上海轻量级互动地图实验室，使用 Leaflet 1.9.4 与 OSM 标准瓦片，提供城市中心与政府公布经纬度参考范围、移动端操作和地图数据来源说明。",
+      "stack": "纯静态 HTML/CSS/JavaScript · Leaflet 1.9.4 固定 SRI · OSM 按视窗加载；无数据库/位置权限；GitHub Actions 完成 Node 地图行为测试及 5 路由静态 HTTP 冒烟。",
+      "risk": "Production READY 与域名已验证，但匿名公网 HTTP、移动端真实设备及第三方瓦片可用性仍未独立验收。地图审图号、境内公开互联网地图资质与正式商用的地图数据授权尚未确认，不可将此技术 Demo 认定为合规地图产品。",
+      "next": "在真实浏览器验证移动端触摸缩放、坐标同步、瓦片失败降级和 OSM 署名；若面向中国境内正式运营，先审查地图审核/资质和合法底图授权，必要时评估天地图·上海。",
       "evidence": "readme",
       "last_deployment": {
         "state": "READY",
         "target": "production",
-        "created_at": "2026-08-18T09:10:35.966Z",
-        "deployment_id": "dpl_8zLePMNwDn6TMVXEBSTdCJqt2jAc"
+        "created_at": "2026-11-19T05:10:46.736Z",
+        "deployment_id": "dpl_FBRW4wjX3PkQAdaaTvhwXKhUYa6F"
       },
       "site_url": "https://shanghai-map.vercel.app",
       "account": "xiemings-projects",
       "checked_at": "2026-11-19",
-      "query_error": null
+      "query_error": null,
+      "iteration": {
+        "date": "2026-11-19",
+        "main_commit": "0185bda4bfd76e0876972f1cdcd7cb5fa6ebd4a5",
+        "github_pr": "https://github.com/1998x-stack/shanghai_map/pull/1",
+        "ci_run": "https://github.com/1998x-stack/shanghai_map/actions/runs/44463350046",
+        "scope": "OSM provenance, responsive UI, Leaflet interactions, error fallback, security headers and CI smoke",
+        "result": "production_ready",
+        "production_http_verified": false,
+        "mobile_e2e_verified": false,
+        "map_regulatory_verified": false
+      }
     },
     {
       "name": "energy-frontiers-report",

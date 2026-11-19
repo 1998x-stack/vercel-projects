@@ -504,12 +504,13 @@
 
 ### shanghai-map
 
-- **定位：** 纯前端上海地图网页，提供基础地图展示与浏览器交互。
+- **定位：** 上海地图技术演示，提供上海中心参考视图、地理范围查看、响应式地图和可追溯的底图说明。
 - **GitHub：** [1998x-stack/shanghai_map](https://github.com/1998x-stack/shanghai_map)（public）；[Vercel 控制台](https://vercel.com/xiemings-projects/shanghai-map)。
-- **技术证据：** HTML/CSS/JS；依据级别：`readme`。
-- **最近部署：** `READY`；目标：`production`；时间：2026-08-18T09:10:35.966Z。
-- **风险：** 地图数据、版权署名及地理信息更新时间需确认。
-- **建议：** 检测底图来源与脚本加载、移动端交互。
+- **技术证据：** HTML/CSS/JS + Leaflet 1.9.4 SRI、OSM 瓦片政策化配置；GitHub Actions 已通过地图事件模拟测试、来源静态校验和 5 路由 HTTP 冒烟。
+- **最近部署：** `READY`；目标：`production`；commit `0185bda4`；部署 `dpl_FBRW4wjX3PkQAdaaTvhwXKhUYa6F`；时间 2026-11-19T05:10:46.736Z。
+- **修复记录：** 删除未核验人口数字，明确来源与 WGS84 参考点，避免将 `fitBounds` 误作行政边界；优化移动端布局、键盘缩放同步、第三方瓦片失败提示、Vercel 安全头与静态健康探针。
+- **保留风险：** 生产匿名公网访问与真实手机 UI 尚未验收；OSM 瓦片无 SLA；上海/中国境内正式地图服务涉及审图、资质与数据授权，不能因 Production READY 推断已合规。
+- **建议：** 按 [本轮专项审计报告](iterations/shanghai-map-2026-11-19.md) 进行真实 HTTP/触控验证及底图合规评估，在取得授权前不增加 POI/边界或地理位置上传。
 
 ## 限制、更新时间与后续验收
 

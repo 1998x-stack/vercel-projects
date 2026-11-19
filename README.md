@@ -44,6 +44,7 @@
 - **Emotional Expert**：历史生产部署出现 BLOCKED，不能因新预览构建 READY 就判定生产恢复。
 - **Theory of Evolution**：GitHub 当前只有占位 README；缺少实际站点内容，最近部署仍 BLOCKED。
 - **India Supply Chain Watch（第 2 轮，2026-11-19）**：现有 31 条研究资料和 20 条选择性获批项目记录，官方 ECMS/DGTR/FDI 增量更新已纳入生产版；GitHub CI、CSV 漂移检查与 Vercel Production 均成功。公开域名匿名访问及真实投稿后台仍待验收。详见 [来源与部署专项报告](docs/iterations/india-watch-official-source-refresh-2026-11-19.md)。
+- **Shanghai Map（2026-11-19 完成工程与来源审计）**：移动端与键盘交互、Leaflet SRI、OSM 瓦片政策、来源/范围透明度、故障降级及 CI 已完成；GitHub main 检查通过且 Vercel Production READY。仍需实际公网/手机验活与正式地图服务合规审查，详见 [专项审计报告](docs/iterations/shanghai-map-2026-11-19.md)。
 - **重复仓库：** `historical-records` 与 `historical-records-lu26` 同时关联 `historicalRecords`。
 - **名称/源码定位差异：** `salary-calculator` 关联 `myMoney`，后者 README 描述为个人记账应用。
 
