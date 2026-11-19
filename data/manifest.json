@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "title": "Vercel Projects Atlas",
+  "generated_at": "2026-11-19",
+  "scope": "xiemings-projects",
+  "note": "这是经过认证连接取得的时间点快照，last_deployment 为最新一次部署（含预览），READY 不是网站功能或公开可达性证明。",
+  "expected": {
+    "vercel_projects": 51,
+    "github_links": 49,
+    "unique_github_repositories": 48,
+    "private_repositories": 40,
+    "public_repositories": 8
+  },
+  "groups": [
+    {
+      "id": "tools-productivity",
+      "name": "应用与效率工具",
+      "emoji": "⚙️",
+      "description": "任务流、文本比较、项目导航与应用界面"
+    },
+    {
+      "id": "education-career",
+      "name": "教育与职业",
+      "emoji": "🎓",
+      "description": "学科地图、招生资料、课程、测评与职业资格"
+    },
+    {
+      "id": "business-industry",
+      "name": "商业与产业",
+      "emoji": "🏢",
+      "description": "商业知识、制造业、消费品案例、管理与销售"
+    },
+    {
+      "id": "finance-policy",
+      "name": "金融与政策计算",
+      "emoji": "📈",
+      "description": "投资资料、退休政策、个人理财与财务工具"
+    },
+    {
+      "id": "society-law",
+      "name": "社会、法律与传播",
+      "emoji": "⚖️",
+      "description": "法律、政策、传播与情感知识"
+    },
+    {
+      "id": "history-culture",
+      "name": "历史与文化",
+      "emoji": "🏛️",
+      "description": "世界史、区域史、史料与文化专题"
+    },
+    {
+      "id": "media-knowledge",
+      "name": "媒体与知识资源",
+      "emoji": "📚",
+      "description": "书籍音频、演讲、期刊、知识归档"
+    },
+    {
+      "id": "research-geo",
+      "name": "研究情报与地图",
+      "emoji": "🌏",
+      "description": "跨境产业研究、能源报告与地理浏览"
+    }
+  ]
+}
