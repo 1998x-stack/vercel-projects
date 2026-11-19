@@ -78,21 +78,40 @@
         "visibility": "private"
       },
       "category": "tools-productivity",
-      "summary": "本地优先的文本比较工具，使用 Myers 差异对齐、Web Worker 与虚拟化列表处理长文本。",
-      "stack": "Next.js（子目录 text-compare-tool/）",
-      "risk": "需确认 Vercel Root Directory 是否指向实际应用目录。",
-      "next": "核验大文本性能、预览与生产的子目录构建。",
-      "evidence": "readme",
+      "summary": "本地优先的浏览器文本差异分析：Myers 行比较、Unicode grapheme 对齐、Worker/虚拟滚动、Unified Patch；待合并的 V1.0 RC 提供 JSON/Markdown 结构化比较和 512 KiB 本地文件导入。",
+      "stack": "Next.js 15.5.28（维护版，但 15.5.29 安全补丁尚未应用）+ React 19.2.6 + TypeScript + pnpm + Playwright；正式源码位于 text-compare-tool/，仓库根目录还有历史静态原型。",
+      "risk": "原 Vercel Production `READY` 但仍从仓库根目录部署历史静态页面；最新正确根目录 Next.js Preview 已 READY。原 PR #6 `2bba6523` 的 CI 4 Job SUCCESS，但 2026-11-19 最新 PR HEAD `4fbc887d` 因私有仓库 Actions 无 runner、0 测试步骤 FAILURE；内容树与历史通过 SHA 相同，不能把旧运行冒充新 Head 测试。Next.js 15.5.28 尚缺 15.5.29 的 2026-11-03 官方安全修复。",
+      "next": "恢复 GitHub Actions runner/账户政策后，pnpm install --lockfile-only 正式更新 next 与 eslint-config-next 到 15.5.29、提交完整锁文件，重跑 4 Job/安全审计；用正确 rootDirectory=text-compare-tool 的 Vercel Preview 实测，再经 PR 复审合并与 Production SHA 验收。",
+      "evidence": "source-inspection",
       "last_deployment": {
         "state": "READY",
-        "target": "preview/unspecified",
-        "created_at": "2026-11-03T06:30:21.217Z",
-        "deployment_id": "dpl_CBTx9WFgpVAWAZx44UQr4fcKsjXw"
+        "target": "production",
+        "created_at": "2026-11-03T04:11:42.208Z",
+        "deployment_id": "dpl_AWvCibxXsfGebW4r5JhhmwQ6zNa9"
       },
       "site_url": "https://text-compare-seven.vercel.app",
       "account": "xiemings-projects",
       "checked_at": "2026-11-19",
-      "query_error": null
+      "query_error": null,
+      "review": {
+        "date": "2026-11-19",
+        "github_pr": "https://github.com/1998x-stack/TextCompare/pull/6",
+        "state": "OPEN_NOT_MERGED",
+        "original_verified_sha": "2bba65237b63df65396dcbaf411a52eae8c6288b",
+        "original_ci_run": "https://github.com/1998x-stack/TextCompare/actions/runs/41590300148",
+        "original_ci_status": "SUCCESS_4_JOBS",
+        "current_head_sha": "4fbc887d3b308c87d6885804420650e32010a940",
+        "same_tree_as_verified_sha": true,
+        "current_ci_run": "https://github.com/1998x-stack/TextCompare/actions/runs/44470392059",
+        "current_ci_status": "RUNNER_NOT_STARTED",
+        "nextjs_preview_deployment_id": "dpl_DcF3T91zNTwd4ELo2Votz6a1GCDW",
+        "nextjs_preview_sha": "2bba65237b63df65396dcbaf411a52eae8c6288b",
+        "nextjs_preview_status": "READY",
+        "nextjs_project_root": "text-compare-tool",
+        "security_patch_required": "next@15.5.29 and matching lock",
+        "production_updated": false,
+        "external_http_verified": false
+      }
     },
     {
       "name": "web-guide",
