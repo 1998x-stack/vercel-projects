@@ -185,6 +185,45 @@
       "account": "xiemings-projects",
       "checked_at": "2026-11-19",
       "query_error": null
+    },
+    {
+      "name": "energy-frontiers-report",
+      "github": {
+        "full_name": "1998x-stack/energyFrontiersReport",
+        "visibility": "private"
+      },
+      "category": "media-knowledge",
+      "summary": "基于六个系列、28 份 HTML 课件与 22 个 MP3 文件的历史能源课程索引；不是实时能源研究报告或新闻站点。",
+      "stack": "HTML/CSS/JavaScript 静态页面；既有目录脚本 data.js、课程播放器和 Python 转换器；已有代码加固 PR，尚未合并至生产。",
+      "risk": "原课程文件约 472 MiB。既有 Vercel Production READY，但固定生产域名可能允许匿名访问，课程版权及公开传播授权未验证。源码 PR #1 的 Preview READY；私有仓库 GitHub Actions 连续两次没有分配 runner、零测试步骤，不能自动合并或声称 CI 通过。",
+      "next": "核实历史课程与 MP3 的传播授权及 Production 访问保护；修复 GitHub Actions Runner/配额问题或在获授权设备运行严格 E2E；保留源码 PR 待测试通过，后续核对主分支提交与 Vercel Production。",
+      "evidence": "source-inspection",
+      "last_deployment": {
+        "state": "READY",
+        "target": "production",
+        "created_at": "2025-06-12T03:21:49.176Z",
+        "deployment_id": "dpl_GDdab4V3ZmLgTD9AScvuWgfktevK"
+      },
+      "site_url": "https://energy-frontiers-report.vercel.app",
+      "account": "xiemings-projects",
+      "checked_at": "2026-11-19",
+      "query_error": null,
+      "review": {
+        "date": "2026-11-19",
+        "github_pr": "https://github.com/1998x-stack/energyFrontiersReport/pull/1",
+        "preview_status": "READY",
+        "ci_run": "https://github.com/1998x-stack/energyFrontiersReport/actions/runs/44467340125",
+        "ci_status": "RUNNER_NOT_STARTED",
+        "release_status": "NOT_MERGED",
+        "copyright_authorization": "NOT_VERIFIED",
+        "production_public_access": "NOT_VERIFIED",
+        "assets": {
+          "series": 6,
+          "html_files": 28,
+          "mp3_files": 22,
+          "bytes": 494504945
+        }
+      }
     }
   ]
 }

@@ -2,7 +2,7 @@ const $ = (id) => document.getElementById(id);
 const store = { manifest: null, projects: [], category: "all", status: "all", privacy: "all", query: "", sort: "name", lastFocus: null };
 const STATE_NAMES = { READY:"READY", ERROR:"ERROR", BLOCKED:"BLOCKED", QUEUED:"QUEUED", BUILDING:"BUILDING", INITIALIZING:"INITIALIZING", CANCELED:"CANCELED", NONE:"无部署", UNKNOWN:"未知" };
 const STATE_COLORS = {READY:"#7c6cda",ERROR:"#d66860",BLOCKED:"#e3a665",QUEUED:"#8d87c9",BUILDING:"#9282d2",INITIALIZING:"#a6a2db",CANCELED:"#9b9baa",NONE:"#dadce4",UNKNOWN:"#dadce4"};
-const EVIDENCE = {"readme":"GitHub README 已核验","name-only":"仅据项目名推断，未完成源码审阅","vercel-only":"仅 Vercel 项目记录","vercel-metadata":"Vercel 部署元信息"};
+const EVIDENCE = {"readme":"GitHub README 已核验","name-only":"仅据项目名推断，未完成源码审阅","vercel-only":"仅 Vercel 项目记录","vercel-metadata":"Vercel 部署元信息","source-inspection":"已检查连接仓库的源文件与资产目录"};
 function el(tag,className,text){ const n=document.createElement(tag);if(className)n.className=className;if(text!==undefined)n.textContent=text;return n }
 function safeState(p){return p.last_deployment?.state||"NONE"}
 function privacy(p){return p.github?.visibility||"unlinked"}
