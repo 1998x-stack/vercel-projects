@@ -2,10 +2,13 @@
 #
 # atlas-dashboard · 调度器安装/卸载/自检
 # ---------------------------------------------------------------------------
+# 节奏：每 30 分钟一轮，每轮 3 个项目（并行 3 路），安装后立即开始。
+#
 # 用法：
-#   scripts/atlas-dashboard/install-scheduler.sh install         # 装 LaunchAgent，装载后约 1 小时首次触发
+#   scripts/atlas-dashboard/install-scheduler.sh install         # 装 LaunchAgent（RunAtLoad：立即开跑一轮）
+#   scripts/atlas-dashboard/install-scheduler.sh kickstart       # 立刻手动开一轮
 #   scripts/atlas-dashboard/install-scheduler.sh probe           # 用 launchd 探一次 TCC 权限（不跑任务）
-#   scripts/atlas-dashboard/install-scheduler.sh test            # 立刻真实跑一批（会改代码，谨慎）
+#   scripts/atlas-dashboard/install-scheduler.sh test            # 前台真实跑一轮（会改代码）
 #   scripts/atlas-dashboard/install-scheduler.sh fallback-nohup  # 若 launchd 被 TCC 拦截：常驻循环兜底
 #   scripts/atlas-dashboard/install-scheduler.sh stop-fallback   # 停止兜底循环
 #   scripts/atlas-dashboard/install-scheduler.sh uninstall       # 卸载 LaunchAgent
@@ -22,7 +25,7 @@ LABEL="com.1998xstack.atlas-dashboard"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
 ENV_DIR="$HOME/.config/atlas-dashboard"
 ENV_FILE="$ENV_DIR/env"
-INTERVAL="${ATLAS_INTERVAL_SECONDS:-3600}"
+INTERVAL="${ATLAS_INTERVAL_SECONDS:-1800}"
 TICK="$SELF_DIR/tick.sh"
 UID_NUM="$(id -u)"
 
@@ -78,9 +81,9 @@ write_plist() {
     <key>LANG</key>
     <string>en_US.UTF-8</string>
   </dict>
-  <!-- RunAtLoad=false + StartInterval=3600 → 装载后约 1 小时首次触发 -->
+  <!-- RunAtLoad=true + StartInterval=1800 → 装载后立即开一轮，之后每 30 分钟一轮 -->
   <key>RunAtLoad</key>
-  <false/>
+  <true/>
   <key>StartInterval</key>
   <integer>$INTERVAL</integer>
   <key>StandardOutPath</key>
@@ -128,7 +131,7 @@ probe_tcc() {
   if grep -qiE 'operation not permitted|permission denied' "$out"; then
     say "结论：launchd 被 TCC 拦截。两条路任选："
     say "  1) 系统设置 → 隐私与安全性 → 完全磁盘访问权限 → 加入 /bin/bash（然后重跑 install）"
-    say "  2) scripts/atlas-dashboard/install-scheduler.sh fallback-nohup（推荐，继承当前终端权限）"
+    say "  2) 直接跑 install（已会自动改成 fallback-nohup），或显式 fallback-nohup"
     return 1
   fi
   say "结论：launchd 可以读取仓库目录，调度可用。"
@@ -137,11 +140,31 @@ probe_tcc() {
 
 install_all() {
   write_env_file || exit 1
-  write_plist || exit 1
-  load_agent || exit 1
-  say "下一次触发大约在 $(date -v+${INTERVAL}S '+%F %T')（每 ${INTERVAL}s 一批，每批 2 个项目）"
+  say "先探一下 launchd 能不能读 ~/Desktop（TCC）…"
+  if probe_tcc; then
+    write_plist || exit 1
+    load_agent || exit 1
+    say "已装载：立即开第一轮，之后每 ${INTERVAL}s 一轮（每轮 3 个项目，并行 3 路）"
+    say "若第一轮遇到锁（已有轮次在跑）会等待，不会白白跳过一轮。"
+  elif [ "${ATLAS_FORCE_LAUNCHD:-0}" = "1" ]; then
+    write_plist || exit 1
+    load_agent || exit 1
+    say "已按 ATLAS_FORCE_LAUNCHD=1 强制装载 LaunchAgent；在授予完全磁盘访问权限前它跑不起来"
+  else
+    say "→ launchd 被 TCC 拦截，自动改用兜底循环（继承当前终端权限，不改系统设置就能跑）"
+    fallback_loop
+  fi
   say "查看进度：scripts/atlas-dashboard/status.sh"
   say "看日志：   tail -f $STATE_DIR/latest.log"
+}
+
+kickstart() {
+  if launchctl kickstart -k "gui/$UID_NUM/$LABEL" 2>/dev/null; then
+    say "已 kickstart 一轮；若已有轮次在跑会被锁拦住（属正常）"
+  else
+    say "kickstart 失败，直接前台跑一轮："
+    ATLAS_ROOT="$ROOT" bash "$TICK"
+  fi
 }
 
 fallback_loop() {
@@ -151,18 +174,23 @@ fallback_loop() {
     say "兜底循环已在运行（pid=$(cat "$pidfile")）"
     return 0
   fi
-  say "启动兜底循环：先睡 ${INTERVAL}s，再每小时跑一批（继承当前终端的权限，绕过 TCC）"
+  say "启动兜底循环：立即开一轮，之后每 ${INTERVAL}s 一轮（继承当前终端的权限，绕过 TCC）"
+  say "每轮开跑前快照一份 tick.sh 再执行，避免进行中的一轮被编辑弄坏"
   nohup bash -c "
-    sleep $INTERVAL
+    snapshot='$STATE_DIR/tick.snapshot.sh'
     while true; do
+      cp '$TICK' \"\$snapshot\"
       echo \"[\$(date '+%F %T')] fallback tick\" >> '$logf'
-      ATLAS_ROOT='$ROOT' bash '$TICK' >> '$logf' 2>&1
+      ATLAS_ROOT='$ROOT' \
+      ATLAS_PROMPT_FILE='$SELF_DIR/prompt.md' \
+      ATLAS_SEED_FILE='$SELF_DIR/done.seed.tsv' \
+        bash \"\$snapshot\" >> '$logf' 2>&1
       sleep $INTERVAL
     done
   " >>"$logf" 2>&1 &
   echo $! >"$pidfile"
   say "fallback_pid=$(cat "$pidfile")  log=$logf"
-  say "首次运行：$(date -v+${INTERVAL}S '+%F %T')"
+  say "首轮已开始（日志见 ${logf}）"
 }
 
 stop_fallback() {
@@ -185,10 +213,11 @@ uninstall_all() {
 
 case "${1:-}" in
   install) install_all ;;
+  kickstart) kickstart ;;
   probe) probe_tcc ;;
-  test) say "立刻真实跑一批（会修改代码并推送）"; ATLAS_ROOT="$ROOT" bash "$TICK" ;;
+  test) say "前台真实跑一轮（会修改代码并推送）"; ATLAS_ROOT="$ROOT" bash "$TICK" ;;
   fallback-nohup) fallback_loop ;;
   stop-fallback) stop_fallback ;;
   uninstall) uninstall_all ;;
-  *) sed -n '2,20p' "$0" ;;
+  *) sed -n '2,22p' "$0" ;;
 esac

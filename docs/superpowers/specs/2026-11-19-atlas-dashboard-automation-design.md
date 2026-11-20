@@ -12,11 +12,11 @@ india-supply-chain-watch、investmentReference、jobCategories、
 retirementPolicy、shanghai_map、shanghai_school），产出的规范、验证与提交
 质量一致且可复用。剩下 25 个有界面的仓库尚未处理。
 
-目标是把同一套流程**无人值守地**跑完，并且：每小时只跑 2 个项目，从装载
-调度器后约 1 小时开始，避免并发写同一份工作区、避免一瞬间打满机器与配额。
+目标是把同一套流程**无人值守地**跑完，并且：分批小步推进（每轮 3 个），避免一
+瞬间打满机器与配额、避免并发写同一份工作区。
 
 实际落地时 `repos/` 已从 37 个目录增长到 43 个（后台克隆作业仍在补仓库），
-队列实测为 33 个，约 17 小时跑完。
+队列实测为 33 个；按每轮 3 个 / 30 分钟，约 5.5 小时跑完。
 
 ## 目标
 
@@ -44,7 +44,7 @@ retirementPolicy、shanghai_map、shanghai_school），产出的规范、验证�
 （`FounderNotes`、`catBrotherWorld`、`civilLaw`、`historyOfWorldCivilization`、
 `luKeWen`、`scienceReference`、`seeWorld`、`theRoadToWealthFreedomRevolution`），
 目录数由 37 变为 43。因此资格判断必须是**每次 tick 现查**，不能写死名单；
-本次队列经实测为 **33 个**，每批 2 个约 17 小时跑完。
+本次队列经实测为 **33 个**，每轮 3 个、约 5.5 小时跑完。
 
 "今天没有代码改动" 落地为**最近 24 小时滚动窗口**：跨过零点后不会把昨晚刚做完的
 仓库重新算成有资格（纯"自然日"口径会在 00:00 集体失效）。
@@ -68,12 +68,15 @@ retirementPolicy、shanghai_map、shanghai_school），产出的规范、验证�
 
 ## 决策（方案 A）
 
-- **调度**：macOS LaunchAgent（`StartInterval=3600`），等价且比 crontab 可靠 ——
-  crontab 对 `~/Desktop` 受 TCC 限制。装载后约 1 小时首次触发。若实测被 TCC
-  拦截，退回 `nohup` 常驻循环（该进程继承当前终端的权限）。
-- **运行时机**：装载调度器后约 1 小时首次触发，之后每 3600s 一批，每批 2 个。
-- **批大小**：每次 2 个项目；`flock` 风格的目录锁保证同一时刻只有一批（锁超
-  3 小时视为陈旧可回收）。
+- **节奏（用户 2026-11-20 调整）**：每 30 分钟一轮、每轮 3 个、**轮内并行 3 路**，
+  装载后立即开第一轮。原定"每小时 2 个、一小时后开始"已作废。
+  并行是让 "30 分钟 3 个" 真正成立的前提：串行下 3 个项目会远超 30 分钟。
+  3 个项目分别在不同仓库里跑，不共享任何文件，因此写入隔离成立。
+- **调度**：先探 TCC 再决定。能过用 macOS LaunchAgent（`StartInterval=1800`）；
+  实测 launchd 被拦截（`ls repos` → `Operation not permitted`），故自动改用
+  `nohup` 常驻循环（继承当前终端权限，不改系统设置即可运行）。
+- **批大小**：每轮 3 个，并行 3 路；目录锁保证同一时刻只有一轮，锁被占时最多
+  等 `ATLAS_LOCK_WAIT_SECONDS`（默认 600s）而不是直接跳掉整整一轮。
 - **凭证**：`IAUTO_API_KEY` 在安装时从 `~/.zshrc` 提取到
   `~/.config/atlas-dashboard/env`（`chmod 600`，仓库之外）。仓库与提示词中
   不出现任何密钥。push 前执行 `gh auth setup-git`。

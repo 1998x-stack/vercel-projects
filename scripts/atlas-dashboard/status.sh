@@ -71,4 +71,7 @@ for path in "$REPOS_DIR"/*/; do
 done
 echo
 echo "汇总: 待处理=$pending 已完成=$done_n 失败=$failed 工作区脏=$dirty_n 今日已改=$changed 无界面/无提交=$no_ui"
-[ "$pending" -gt 0 ] && echo "预计剩余时间: 每批 2 个 → 约 $(( (pending + 1) / 2 )) 小时"
+if [ "$pending" -gt 0 ]; then
+  rounds=$(( (pending + 2) / 3 ))
+  echo "预计剩余: 每轮 3 个 / 30 分钟 → 约 ${rounds} 轮（≈ $(awk -v r="$rounds" 'BEGIN{printf "%.1f", r*0.5}') 小时）"
+fi

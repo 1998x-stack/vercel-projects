@@ -3,8 +3,8 @@
 # atlas-dashboard · 每批把一个仓库的界面改造成专业 Dashboard
 # ---------------------------------------------------------------------------
 # 用法：
-#   scripts/atlas-dashboard/tick.sh              # 跑一批（默认 2 个项目）
-#   ATLAS_BATCH=1 scripts/atlas-dashboard/tick.sh
+#   scripts/atlas-dashboard/tick.sh              # 跑一轮（默认 3 个项目，并行 3 路）
+#   ATLAS_BATCH=1 ATLAS_PARALLEL=1 scripts/atlas-dashboard/tick.sh   # 退回串行单项目
 #   ATLAS_DRY_RUN=1 scripts/atlas-dashboard/tick.sh   # 只选项目、不执行
 #
 # 设计规范见 docs/superpowers/specs/2026-11-19-atlas-dashboard-automation-design.md
@@ -12,28 +12,31 @@
 # 关键约定：
 #   - "今天有代码改动"是**运行时刻的实时判断**（含未提交改动），不是固定断言。
 #   - pi 只负责 commit，本脚本负责 push；验证闸门不通过就不 push（失败即不公开）。
-#   - 同一时刻只允许一批（目录锁，超过 ATLAS_LOCK_STALE_SECONDS 视为陈旧可回收）。
+#   - 同一时刻只允许一轮（目录锁，超过 ATLAS_LOCK_STALE_SECONDS 视为陈旧可回收）；
+#     轮内各个项目分别在自己的仓库里跑，互不共享文件，所以可以并行。
 #
 set -uo pipefail
 
 SELF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="${ATLAS_ROOT:-$(cd "$SELF_DIR/../.." && pwd)}"
 REPOS_DIR="$ROOT/repos"
-PROMPT_FILE="$SELF_DIR/prompt.md"
+PROMPT_FILE="${ATLAS_PROMPT_FILE:-$SELF_DIR/prompt.md}"
 STATE_DIR="${ATLAS_STATE_DIR:-$ROOT/logs/atlas-dashboard}"
 LEDGER="$STATE_DIR/ledger.tsv"
 
 MODEL="${ATLAS_MODEL:-iagent/standard}"
-BATCH="${ATLAS_BATCH:-2}"
-TIMEOUT_SECONDS="${ATLAS_TIMEOUT_SECONDS:-2400}"
+BATCH="${ATLAS_BATCH:-3}"
+PARALLEL="${ATLAS_PARALLEL:-3}"
+TIMEOUT_SECONDS="${ATLAS_TIMEOUT_SECONDS:-1800}"
 MAX_ATTEMPTS="${ATLAS_MAX_ATTEMPTS:-2}"
 SKILL_DIR="${ATLAS_SKILL_DIR:-$HOME/.agents/skills/ui-ux-pro-max}"
 LOCK_STALE_SECONDS="${ATLAS_LOCK_STALE_SECONDS:-10800}"
+LOCK_WAIT_SECONDS="${ATLAS_LOCK_WAIT_SECONDS:-1800}"
 SKIP_PROJECTS="${ATLAS_SKIP:-logicTraining}"
 ENV_FILE="${ATLAS_ENV_FILE:-$HOME/.config/atlas-dashboard/env}"
 DRY_RUN="${ATLAS_DRY_RUN:-0}"
 ALLOW_NON_MAIN="${ATLAS_ALLOW_NON_MAIN:-0}"
-SEED_FILE="$SELF_DIR/done.seed.tsv"
+SEED_FILE="${ATLAS_SEED_FILE:-$SELF_DIR/done.seed.tsv}"
 IGNORE_SEED="${ATLAS_IGNORE_SEED:-0}"
 # “今天没有代码改动”落地为 24 小时滚动窗口：跨零点时不会把昨晚刚做完的仓库重新算成有资格。
 CHANGED_WINDOW="${ATLAS_CHANGED_WINDOW:-24 hours ago}"
@@ -75,26 +78,32 @@ release_lock() {
 
 acquire_lock() {
   mkdir -p "$STATE_DIR"
-  local lock="$STATE_DIR/lock" now ts age
-  if mkdir "$lock" 2>/dev/null; then
-    printf '%s %s\n' "$$" "$(date +%s)" >"$lock/owner"
-    LOCK_DIR="$lock"
-    trap release_lock EXIT INT TERM
-    return 0
-  fi
-  now="$(date +%s)"
-  ts="$(awk '{print $2}' "$lock/owner" 2>/dev/null || echo 0)"
-  age=$(( now - ${ts:-0} ))
-  if [ "$age" -gt "$LOCK_STALE_SECONDS" ]; then
-    log "warn: 回收陈旧锁（age=${age}s > ${LOCK_STALE_SECONDS}s）"
-    rm -rf "$lock"
-    mkdir "$lock" && printf '%s %s\n' "$$" "$(date +%s)" >"$lock/owner" || return 1
-    LOCK_DIR="$lock"
-    trap release_lock EXIT INT TERM
-    return 0
-  fi
-  log "skip: 上一批仍在运行（$lock, age=${age}s）——本次不启动"
-  return 1
+  local lock="$STATE_DIR/lock" now ts age waited=0
+  while :; do
+    if mkdir "$lock" 2>/dev/null; then
+      printf '%s %s\n' "$$" "$(date +%s)" >"$lock/owner"
+      LOCK_DIR="$lock"
+      trap release_lock EXIT INT TERM
+      return 0
+    fi
+    now="$(date +%s)"
+    ts="$(awk '{print $2}' "$lock/owner" 2>/dev/null || echo 0)"
+    age=$(( now - ${ts:-0} ))
+    if [ "$age" -gt "$LOCK_STALE_SECONDS" ]; then
+      log "warn: 回收陈旧锁（age=${age}s > ${LOCK_STALE_SECONDS}s）"
+      rm -rf "$lock"
+      continue
+    fi
+    if [ "$waited" -ge "$LOCK_WAIT_SECONDS" ]; then
+      log "skip: 上一轮仍在运行（age=${age}s，已等 ${waited}s）——本次不启动"
+      return 1
+    fi
+    if [ "$waited" = "0" ]; then
+      log "warn: 上一轮仍在运行（age=${age}s），最多等 ${LOCK_WAIT_SECONDS}s，避免整轮被跳过"
+    fi
+    sleep 15
+    waited=$(( waited + 15 ))
+  done
 }
 
 # --- 账本 ------------------------------------------------------------------
@@ -197,7 +206,7 @@ render_prompt() {
       -e "s|{{SKILL_DIR}}|$SKILL_DIR|g" \
       "$PROMPT_FILE" >"$out"
   # 技能正文前置注入：在 repos/<项目> 内 pi 不会自动发现该技能
-  cat "$SKILL_DIR/SKILL.md" "$out" >"$TMP_DIR/prompt.full"
+  cat "$SKILL_DIR/SKILL.md" "$out" >"$TMP_DIR/$proj.full"
 }
 
 run_agent() {
@@ -210,7 +219,7 @@ run_agent() {
     run_with_timeout "$TIMEOUT_SECONDS" \
       "$PI_BIN" -p --model "$MODEL" --no-approve --no-extensions --no-mcp \
         --skill "$SKILL_DIR" --name "atlas-dashboard-$proj" \
-        <"$TMP_DIR/prompt.full"
+        <"$TMP_DIR/$proj.full"
   ) >>"$RUN_LOG" 2>&1
   rc=$?
   end_ts="$(date +%s)"
@@ -294,7 +303,7 @@ process_project() {
     return 0
   fi
 
-  render_prompt "$proj" "$d" "$remote" "$branch" "$TMP_DIR/prompt.md"
+  render_prompt "$proj" "$d" "$remote" "$branch" "$TMP_DIR/prompt-$proj.md"
   run_agent "$proj" "$d"
   rc=$?
 
@@ -330,10 +339,9 @@ main() {
   mkdir -p "$STATE_DIR/runs"
   RUN_LOG="$STATE_DIR/runs/$(date +%Y%m%d-%H%M%S).log"
   : >>"$RUN_LOG"
-  ln -sf "$RUN_LOG" "$STATE_DIR/latest.log" 2>/dev/null
 
   touch "$STATE_DIR/heartbeat"
-  log "=== atlas-dashboard tick start $(date '+%F %T') (pid=$$, batch=$BATCH) ==="
+  log "=== atlas-dashboard tick start $(date '+%F %T') (pid=$$, batch=$BATCH, parallel=$PARALLEL) ==="
 
   [ -f "$PROMPT_FILE" ] || { log "ERROR: 缺少 $PROMPT_FILE"; exit 1; }
   [ -f "$SKILL_DIR/SKILL.md" ] || { log "ERROR: 找不到技能 $SKILL_DIR/SKILL.md"; exit 1; }
@@ -353,6 +361,9 @@ main() {
   log "pi=$PI_BIN model=$MODEL skill=$SKILL_DIR timeout=${TIMEOUT_BIN:-（内置看门狗）}"
 
   acquire_lock || exit 0
+  # 只有真正拿到锁、开始干活的那一轮才更新 latest.log，
+  # 否则一个在等锁的 tick 会把正在跑的那一轮日志指针顶掉。
+  ln -sf "$RUN_LOG" "$STATE_DIR/latest.log" 2>/dev/null
   load_credentials || { ledger_add "-" "FAIL_ENV" "no-api-key"; exit 1; }
 
     if [ "$DRY_RUN" != "1" ] && command -v gh >/dev/null 2>&1; then
@@ -379,15 +390,46 @@ main() {
     return 0
   fi
 
-  log "-- 本批：${PICKED[*]}"
-  local ok=0 fail=0 p
-  for p in "${PICKED[@]}"; do
-    [ -d "$REPOS_DIR/$p" ] || { log "-- [$p] 目录不存在，跳过"; continue; }
-    log "-- [$p] 开始 $(date '+%T')"
-    if process_project "$p"; then ok=$(( ok + 1 )); else fail=$(( fail + 1 )); fi
-    log "-- [$p] 结束 $(date '+%T')"
-  done
-  log "=== tick end: ok=$ok fail=$fail 剩余待处理见 status.sh ==="
+  local ok=0 fail=0 p rc stamp child_log
+  stamp="$(date +%Y%m%d-%H%M%S)"
+
+  if [ "$PARALLEL" -le 1 ] || [ "${#PICKED[@]}" -eq 1 ]; then
+    log "-- 本批（串行）：${PICKED[*]}"
+    for p in "${PICKED[@]}"; do
+      [ -d "$REPOS_DIR/$p" ] || { log "-- [$p] 目录不存在，跳过"; continue; }
+      log "-- [$p] 开始 $(date '+%T')"
+      if process_project "$p"; then ok=$(( ok + 1 )); else fail=$(( fail + 1 )); fi
+      log "-- [$p] 结束 $(date '+%T')"
+    done
+  else
+    log "-- 本轮（并行 ${PARALLEL} 路）：${PICKED[*]}"
+    local pids=() names=()
+    for p in "${PICKED[@]}"; do
+      [ -d "$REPOS_DIR/$p" ] || { log "-- [$p] 目录不存在，跳过"; continue; }
+      while [ "$(jobs -rp | wc -l | tr -d ' ')" -ge "$PARALLEL" ]; do sleep 2; done
+      child_log="$STATE_DIR/runs/${stamp}-${p}.log"
+      : >"$child_log"
+      ln -sf "$child_log" "$STATE_DIR/latest-$p.log" 2>/dev/null
+      (
+        # 子进程不得触发父进程的 EXIT trap（那会提前删掉共享临时目录并释放锁）
+        trap - EXIT INT TERM
+        RUN_LOG="$child_log"
+        process_project "$p"
+      ) &
+      pids+=("$!")
+      names+=("$p")
+      log "-- [$p] 已派发 $(date '+%T')  →  tail -f $child_log"
+    done
+    local i
+    for i in "${!pids[@]}"; do
+      wait "${pids[$i]}"
+      rc=$?
+      p="${names[$i]}"
+      if [ "$rc" = "0" ]; then ok=$(( ok + 1 )); else fail=$(( fail + 1 )); fi
+      log "-- [$p] 结束 rc=$rc $(date '+%T')"
+    done
+  fi
+  log "=== tick end: ok=$ok fail=${fail}（每项目日志见 runs/${stamp}-*.log） 剩余待处理见 status.sh ==="
 }
 
 main "$@"
