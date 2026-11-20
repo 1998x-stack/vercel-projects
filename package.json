@@ -13,6 +13,9 @@
     "ui:check": "node scripts/ui-check.mjs",
     "clone:repos": "node scripts/clone-repos.mjs",
     "clone:repos:bg": "bash scripts/clone-repos.sh",
+    "atlas:tick": "bash scripts/atlas-dashboard/tick.sh",
+    "atlas:status": "bash scripts/atlas-dashboard/status.sh",
+    "atlas:install": "bash scripts/atlas-dashboard/install-scheduler.sh install",
     "build": "node scripts/validate.mjs && node scripts/build.mjs",
     "test": "node --test tests/*.test.mjs"
   },

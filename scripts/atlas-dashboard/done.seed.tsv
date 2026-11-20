@@ -1,0 +1,19 @@
+# atlas-dashboard · 已完成的仓库种子名单
+#
+# 为什么需要它：这个清单里的仓库在自动化上线前（2026-11-19）已经由人工/会话
+# 逐个用 ui-ux-pro-max 完成过 Dashboard 改造，也已经在各自 origin 上有提交。
+# "今天没有代码改动"这条规则只覆盖当天；一旦跨过零点、或 24 小时滚动窗口滑过去，
+# 它们就会重新变成"有资格"，从而被第二轮覆盖掉。种子名单让这件事只发生一次。
+#
+# 格式：<项目目录名>\t<当时的 HEAD 短 sha>\t<说明>
+# 只在 ATLAS_IGNORE_SEED=1 时才忽略本文件。项目名与 GitHub 路径属于本项目
+# 明确要求公开整理的范围（AGENTS.md 规则 3）。
+#
+CEQT	334bcbd	fix(dashboard): explain the JS requirement when scripting is disabled
+TextCompare	fc76191	feat(v0.6-ui): diff analytics dashboard
+india-supply-chain-watch	42672ba	feat: verified India 2026 policy sources, CSV consistency and deploy guard
+investmentReference	c2ce584	design: 重构为专业课程库 Dashboard（Minimalism & Swiss · 深色优先）
+jobCategories	6c14578	fix(a11y): address independent review findings (focus, touch targets)
+retirementPolicy	8cdce79	feat: redesign retirement policy site as a professional dashboard
+shanghai_map	0185bda	feat: harden Shanghai map sources, responsive UX and deployment verification
+shanghai_school	bbcd6ef	docs: 补充设计规范、数据核验记录与 README 更新
