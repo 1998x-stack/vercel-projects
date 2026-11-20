@@ -128,13 +128,20 @@ seed_has() {
 }
 
 # --- 资格判断 --------------------------------------------------------------
+# 认定"有界面"：静态站（.html）或组件式前端（jsx/tsx/vue/svelte/astro）。
+# 只认 .html 会漏掉 Next.js 这类没有 index.html 的项目。
+has_ui() {
+  [ -n "$(find "$1" \( -name '*.html' -o -name '*.jsx' -o -name '*.tsx' \
+        -o -name '*.vue' -o -name '*.svelte' -o -name '*.astro' \) \
+        -not -path '*/.git/*' -not -path '*/node_modules/*' -print -quit 2>/dev/null)" ]
+}
+
 # 输出：OK，或跳过原因。全部基于此刻的真实 git 状态。
 repo_state() {
   local d="$REPOS_DIR/$1"
   [ -d "$d/.git" ] || { echo "no-git"; return; }
   git -C "$d" rev-parse --verify HEAD >/dev/null 2>&1 || { echo "no-commits"; return; }
-  [ -n "$(find "$d" -maxdepth 3 -name '*.html' -not -path '*/.git/*' -print -quit 2>/dev/null)" ] \
-    || { echo "no-ui"; return; }
+  has_ui "$d" || { echo "no-ui"; return; }
   local dirty
   dirty="$(git -C "$d" status --porcelain 2>/dev/null | wc -l | tr -d ' ')"
   [ "$dirty" = "0" ] || { echo "dirty-working-tree"; return; }

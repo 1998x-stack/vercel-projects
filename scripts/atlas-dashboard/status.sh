@@ -19,8 +19,21 @@ last_status() {
   awk -F'\t' -v p="$1" '$2==p{last=$3} END{if(last!="")print last}' "$LEDGER"
 }
 
+# 认定"有界面"：静态站（.html）或组件式前端（jsx/tsx/vue/svelte/astro）。
+# 只认 .html 会漏掉 Next.js 这类没有 index.html 的项目。
+has_ui() {
+  [ -n "$(find "$1" \( -name '*.html' -o -name '*.jsx' -o -name '*.tsx' \
+        -o -name '*.vue' -o -name '*.svelte' -o -name '*.astro' \) \
+        -not -path '*/.git/*' -not -path '*/node_modules/*' -print -quit 2>/dev/null)" ]
+}
+
+seed_has() {
+  [ -f "$SELF_DIR/done.seed.tsv" ] || return 1
+  awk -F'\t' -v p="$1" '!/^#/ && $1==p{found=1} END{exit !found}' "$SELF_DIR/done.seed.tsv"
+}
+
 dirty_of() { git -C "$REPOS_DIR/$1" status --porcelain 2>/dev/null | wc -l | tr -d ' '; }
-today_of() { git -C "$REPOS_DIR/$1" log --since="$TODAY 00:00:00" --oneline 2>/dev/null | wc -l | tr -d ' '; }
+today_of() { git -C "$REPOS_DIR/$1" log --since="24 hours ago" --oneline 2>/dev/null | wc -l | tr -d ' '; }
 
 echo "atlas-dashboard status · $(date '+%F %T')"
 echo "root=$ROOT"
@@ -54,23 +67,23 @@ fi
 echo
 
 echo "== 队列 =="
-pending=0; done_n=0; changed=0; no_ui=0; dirty_n=0; failed=0
+pending=0; done_n=0; changed=0; no_ui=0; dirty_n=0; failed=0; seeded=0
 for path in "$REPOS_DIR"/*/; do
   d="$(basename "$path")"
   [ -d "$path/.git" ] || continue
   git -C "$path" rev-parse --verify HEAD >/dev/null 2>&1 || { no_ui=$(( no_ui + 1 )); continue; }
-  [ -n "$(find "$path" -maxdepth 3 -name '*.html' -not -path '*/.git/*' -print -quit 2>/dev/null)" ] \
-    || { no_ui=$(( no_ui + 1 )); continue; }
+  has_ui "$path" || { no_ui=$(( no_ui + 1 )); continue; }
   st="$(last_status "$d")"
-  if [ "$st" = "DONE" ]; then done_n=$(( done_n + 1 )); continue; fi
+  if [ "$st" = "DONE" ]; then done_n=$(( done_n + 1 )); echo "  已完成 $d"; continue; fi
   case "$st" in FAIL*) failed=$(( failed + 1 )); echo "  FAIL  $d  ($(tail -200 "$LEDGER" | awk -F'\t' -v p="$d" '$2==p{print $3" "$4}' | tail -1))"; continue;; esac
+  if seed_has "$d"; then seeded=$(( seeded + 1 )); echo "  已完成 ${d}（种子名单：自动化前已完成）"; continue; fi
   if [ "$(dirty_of "$d")" != "0" ]; then dirty_n=$(( dirty_n + 1 )); echo "  脏    $d"; continue; fi
-  if [ "$(today_of "$d")" != "0" ]; then changed=$(( changed + 1 )); echo "  今日已改 $d"; continue; fi
+  if [ "$(today_of "$d")" != "0" ]; then changed=$(( changed + 1 )); echo "  24h内已改 $d"; continue; fi
   pending=$(( pending + 1 ))
   echo "  待处理 $d"
 done
 echo
-echo "汇总: 待处理=$pending 已完成=$done_n 失败=$failed 工作区脏=$dirty_n 今日已改=$changed 无界面/无提交=$no_ui"
+echo "汇总: 待处理=$pending 已完成=$done_n 种子名单=$seeded 失败=$failed 工作区脏=$dirty_n 24h内已改=$changed 无界面/无提交=$no_ui"
 if [ "$pending" -gt 0 ]; then
   rounds=$(( (pending + 2) / 3 ))
   echo "预计剩余: 每轮 3 个 / 30 分钟 → 约 ${rounds} 轮（≈ $(awk -v r="$rounds" 'BEGIN{printf "%.1f", r*0.5}') 小时）"
